@@ -1,19 +1,19 @@
 /**
  * ===================================================================
- *   Elite Install - Prestige Edition Script
- *   Version: 3.0
- *   ===================================================================
+ * Elite Install - Professional Edition Script
+ * Version: 1.0
+ * ===================================================================
  *
- *   This script provides high-performance, accessible, and modular
- *   interactivity for the Elite Install website.
+ * This script provides high-performance, accessible, and modular
+ * interactivity for the Elite Install website.
  *
- *   TABLE OF CONTENTS
- *   1. App State & Configuration
- *   2. Core Modules
- *      - mobileNav: Handles the mobile navigation menu and accessibility.
- *      - dynamicGlow: Creates the performant, mouse-following background glow.
- *      - scrollAnimator: Manages fade-in animations on scroll.
- *   3. Initialization
+ * TABLE OF CONTENTS
+ * 1. App State & Configuration
+ * 2. Core Modules
+ * - mobileNav: Handles the mobile navigation menu, focus trapping, and accessibility.
+ * - stickyHeader: Manages the header state on scroll.
+ * - scrollAnimator: Manages fade-in animations on scroll.
+ * 3. Initialization
  *
  * ===================================================================
  */
@@ -32,10 +32,13 @@
         },
         nav: {
             toggleSelector: '.mobile-menu-toggle',
+            linksSelector: '#nav-links',
             openBodyClass: 'mobile-nav-open',
         },
-        glow: {
-            // Configuration for the dynamic glow effect
+        header: {
+            selector: '.main-header',
+            scrolledClass: 'is-scrolled',
+            scrollThreshold: 10, // Pixels to scroll before adding the class
         }
     };
 
@@ -44,77 +47,111 @@
 
     /**
      * @module mobileNav
-     * @description Handles all logic for the mobile navigation menu.
+     * @description Handles all logic for the mobile navigation menu, including focus trapping for accessibility.
      */
     const mobileNav = {
         init() {
-            const toggleButton = document.querySelector(CONFIG.nav.toggleSelector);
-            if (!toggleButton) return;
+            this.toggleButton = document.querySelector(CONFIG.nav.toggleSelector);
+            this.navLinksContainer = document.querySelector(CONFIG.nav.linksSelector);
+            if (!this.toggleButton || !this.navLinksContainer) return;
 
-            toggleButton.addEventListener('click', this.toggleMenu.bind(this));
+            this.focusableElements = this.navLinksContainer.querySelectorAll('a[href], button');
+            this.firstFocusable = this.focusableElements[0];
+            this.lastFocusable = this.focusableElements[this.focusableElements.length - 1];
+
+            this.toggleButton.addEventListener('click', this.toggleMenu.bind(this));
             document.addEventListener('keydown', this.handleKeydown.bind(this));
         },
 
-        toggleMenu(event) {
+        toggleMenu() {
             const body = document.body;
-            const toggleButton = event.currentTarget;
             const isExpanded = body.classList.toggle(CONFIG.nav.openBodyClass);
 
-            toggleButton.setAttribute('aria-expanded', String(isExpanded));
+            this.toggleButton.setAttribute('aria-expanded', String(isExpanded));
             body.style.overflow = isExpanded ? 'hidden' : '';
+
+            if (isExpanded) {
+                this.firstFocusable.focus();
+            }
         },
 
         handleKeydown(event) {
-            if (event.key === 'Escape' && document.body.classList.contains(CONFIG.nav.openBodyClass)) {
-                // Find the button to correctly call the toggle function
-                const toggleButton = document.querySelector(CONFIG.nav.toggleSelector);
-                if(toggleButton) this.toggleMenu({ currentTarget: toggleButton });
+            const isNavOpen = document.body.classList.contains(CONFIG.nav.openBodyClass);
+            if (!isNavOpen) return;
+
+            if (event.key === 'Escape') {
+                this.toggleMenu();
+            }
+
+            // Focus trap logic
+            if (event.key === 'Tab') {
+                if (event.shiftKey) { // Shift + Tab
+                    if (document.activeElement === this.firstFocusable) {
+                        this.lastFocusable.focus();
+                        event.preventDefault();
+                    }
+                } else { // Tab
+                    if (document.activeElement === this.lastFocusable) {
+                        this.firstFocusable.focus();
+                        event.preventDefault();
+                    }
+                }
             }
         }
     };
 
     /**
-     * @module dynamicGlow
-     * @description Creates a performant, mouse-following background glow.
+     * @module stickyHeader
+     * @description Adds a class to the header when the user scrolls down.
      */
-    const dynamicGlow = {
-        mousePos: { x: window.innerWidth / 2, y: window.innerHeight / 2 },
-
+    const stickyHeader = {
         init() {
-            // Respect accessibility settings for reduced motion
-            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-                return;
-            }
-            
-            document.body.addEventListener('mousemove', e => {
-                this.mousePos.x = e.clientX;
-                this.mousePos.y = e.clientY;
+            this.header = document.querySelector(CONFIG.header.selector);
+            if (!this.header) return;
+
+            // Use a flag to avoid running the check on every single scroll event pixel
+            let ticking = false;
+            window.addEventListener('scroll', () => {
+                if (!ticking) {
+                    window.requestAnimationFrame(() => {
+                        this.updateHeaderState();
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
             });
-            
-            this.update();
+            // Run on load as well in case the page is reloaded scrolled down
+            this.updateHeaderState();
         },
 
-        // Use requestAnimationFrame for a buttery-smooth, performant animation loop
-        update() {
-            document.body.style.setProperty('--x', `${this.mousePos.x}px`);
-            document.body.style.setProperty('--y', `${this.mousePos.y}px`);
-            requestAnimationFrame(this.update.bind(this));
+        updateHeaderState() {
+            if (window.scrollY > CONFIG.header.scrollThreshold) {
+                this.header.classList.add(CONFIG.header.scrolledClass);
+            } else {
+                this.header.classList.remove(CONFIG.header.scrolledClass);
+            }
         }
     };
 
     /**
      * @module scrollAnimator
-     * @description Fades in elements as they scroll into the viewport.
+     * @description Fades in elements as they scroll into the viewport using Intersection Observer.
      */
     const scrollAnimator = {
         init() {
             const elementsToAnimate = document.querySelectorAll(CONFIG.animation.selector);
             if (elementsToAnimate.length === 0) return;
 
+            // Do not run animations if user prefers reduced motion
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                elementsToAnimate.forEach(el => el.classList.add(CONFIG.animation.visibleClass));
+                return;
+            }
+
             const observer = new IntersectionObserver((entries, obs) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        // Apply delay from data attribute for staggered effect
+                        // Apply delay from data attribute for a staggered effect
                         const delay = entry.target.dataset.delay || '0';
                         entry.target.style.transitionDelay = `${delay}ms`;
                         entry.target.classList.add(CONFIG.animation.visibleClass);
@@ -134,16 +171,20 @@
 
     /**
      * @function main
-     * @description The main entry point for the application.
-     *              Initializes all modules after the DOM is ready.
+     * @description The main entry point for the application. Initializes all modules after the DOM is ready.
      */
     const main = () => {
         mobileNav.init();
-        dynamicGlow.init();
+        stickyHeader.init();
         scrollAnimator.init();
     };
 
     // Run the main function once the DOM is fully loaded.
-    document.addEventListener('DOMContentLoaded', main);
+    // Using 'interactive' is slightly faster than 'complete' or 'load'
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', main);
+    } else {
+        main();
+    }
 
 })();
