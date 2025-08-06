@@ -1,11 +1,12 @@
 /**
  * ===================================================================
  * Elite Install - Professional Edition Stylesheet
- * Version: 1.0
+ * Version: 2.0 (Monochrome Premium Theme)
  * ===================================================================
  *
  * This stylesheet provides a modern, professional, and fully responsive
- * design for the Elite Install website.
+ * design for the Elite Install website, themed with a premium, textured
+ * black and white palette.
  *
  * TABLE OF CONTENTS
  * 1.  CSS Variables (Root)
@@ -26,16 +27,15 @@
 
 /* --- 1. CSS Variables (Root) --- */
 :root {
-    --color-primary: #0D1B2A;       /* Deep Navy */
-    --color-secondary: #415A77;    /* Slate Blue */
-    --color-accent: #778DA9;       /* Muted Blue */
-    --color-light: #E0E1DD;        /* Light Gray/Off-white */
+    --color-primary: #121212;      /* Near Black */
+    --color-secondary: #1F1F1F;    /* Dark Grey */
+    --color-accent: #888888;       /* Medium Grey for text/borders */
+    --color-light: #EAEAEA;        /* Light Grey/Off-white */
     --color-white: #FFFFFF;
-    --color-gradient-start: #5a7ecf;
-    --color-gradient-end: #3a5dae;
+    --color-border: rgba(255, 255, 255, 0.1); /* Subtle border color */
 
     --font-family-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-    --font-family-serif: 'Lora', serif; /* For headings or blockquotes if desired */
+    --font-family-serif: 'Lora', serif;
 
     --container-width: 1200px;
     --container-padding: 1.5rem;
@@ -64,6 +64,8 @@ body {
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    /* Subtle noise texture for a premium feel */
+    background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"%3E%3Cfilter id="n" x="0" y="0"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100" height="100" filter="url(%23n)" opacity="0.03"/%3E%3C/svg%3E');
 }
 
 img, svg {
@@ -82,15 +84,16 @@ h1, h2, h3, h4 {
 h1 { font-size: clamp(2.5rem, 5vw + 1rem, 4.5rem); }
 h2 { font-size: clamp(2rem, 4vw, 3rem); }
 h3 { font-size: 1.5rem; }
-h4 { font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px; }
+h4 { font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px; color: var(--color-accent); }
 
 p {
     margin-bottom: 1rem;
-    max-width: 70ch; /* Improves readability */
+    max-width: 70ch;
+    color: var(--color-accent);
 }
 
 a {
-    color: var(--color-accent);
+    color: var(--color-light);
     text-decoration: none;
     transition: color var(--transition-fast);
 }
@@ -123,7 +126,6 @@ a:hover {
 .section-header p {
     margin-left: auto;
     margin-right: auto;
-    color: var(--color-accent);
 }
 
 .skip-link {
@@ -146,6 +148,7 @@ a:hover {
     background-color: rgba(0,0,0,0.2);
     padding: 0.5rem 0;
     font-size: 0.9rem;
+    border-bottom: 1px solid var(--color-border);
 }
 .utility-header-content {
     display: flex;
@@ -165,10 +168,10 @@ a:hover {
 }
 
 .main-header.is-scrolled {
-    background-color: rgba(13, 27, 42, 0.85);
+    background-color: rgba(18, 18, 18, 0.85);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    border-bottom: 1px solid var(--color-border);
 }
 
 .nav-container {
@@ -214,12 +217,12 @@ a:hover {
 }
 
 .mobile-menu-toggle {
-    display: none; /* Hidden on desktop */
+    display: none;
     background: none;
     border: none;
     color: var(--color-white);
     cursor: pointer;
-    z-index: 1001; /* Above nav links */
+    z-index: 1001;
 }
 
 /* --- 6. Mobile Navigation --- */
@@ -262,7 +265,7 @@ a:hover {
     text-align: center;
     padding: 8rem 0;
     min-height: calc(100vh - var(--header-height));
-    background: radial-gradient(circle at 50% 30%, rgba(65, 90, 119, 0.2), transparent 70%);
+    background: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(255, 255, 255, 0.1), transparent);
 }
 
 .hero h1 {
@@ -289,35 +292,44 @@ a:hover {
 .btn {
     display: inline-block;
     padding: 0.8rem 2rem;
-    border-radius: 50px;
+    border-radius: 8px;
     font-weight: 700;
     text-align: center;
-    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
-    border: 2px solid transparent;
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-fast), color var(--transition-fast);
+    border: 1px solid transparent;
+    cursor: pointer;
 }
 
 .btn:hover {
     transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
 }
 
 .btn-gradient {
-    background-image: linear-gradient(90deg, var(--color-gradient-start), var(--color-gradient-end));
-    color: var(--color-white);
+    background-color: var(--color-white);
+    color: var(--color-primary);
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
+}
+.btn-gradient:hover {
+    box-shadow: 0 6px 20px rgba(255, 255, 255, 0.15);
 }
 
 .btn-secondary {
     background-color: transparent;
-    border-color: var(--color-secondary);
+    border-color: var(--color-border);
     color: var(--color-light);
 }
 .btn-secondary:hover {
-    background-color: var(--color-secondary);
-    color: var(--color-white);
+    background-color: var(--color-white);
+    color: var(--color-primary);
+    border-color: var(--color-white);
 }
 
 .btn-primary {
     background-color: var(--color-white);
+    color: var(--color-primary);
+}
+.btn-primary:hover {
+    background-color: var(--color-light);
     color: var(--color-primary);
 }
 
@@ -326,6 +338,7 @@ a:hover {
     font-size: 0.9rem;
     border-color: var(--color-accent);
     color: var(--color-accent);
+    border-radius: 6px;
 }
 .btn-utility:hover {
     background-color: var(--color-accent);
@@ -342,13 +355,17 @@ a:hover {
     background-color: var(--color-secondary);
     padding: 5rem 0;
     text-align: center;
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
 }
 .cta-section h2 { margin-bottom: 1rem; }
 .cta-section p { margin: 0 auto 2rem auto; }
 
 /* --- 9. Core Sections (Principles, Process, Testimonial) --- */
 .section-accented {
-    background-color: rgba(0,0,0,0.15);
+    background-color: var(--color-secondary);
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
 }
 
 .features-grid {
@@ -358,10 +375,15 @@ a:hover {
 }
 
 .feature-card {
-    background-color: var(--color-primary);
+    background-color: rgba(0,0,0,0.2);
     padding: 2rem;
     border-radius: 8px;
-    border: 1px solid var(--color-secondary);
+    border: 1px solid var(--color-border);
+    transition: background-color var(--transition-fast), transform var(--transition-fast);
+}
+.feature-card:hover {
+    background-color: rgba(255,255,255,0.05);
+    transform: translateY(-5px);
 }
 .feature-icon {
     color: var(--color-white);
@@ -373,9 +395,9 @@ a:hover {
 }
 .feature-card h3 {
     margin-bottom: 1rem;
+    color: var(--color-light);
 }
 .feature-card p {
-    color: var(--color-accent);
     font-size: 0.95rem;
     margin-bottom: 0;
 }
@@ -387,11 +409,13 @@ a:hover {
     text-align: center;
 }
 .process-step span {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     width: 50px;
     height: 50px;
-    line-height: 50px;
     border-radius: 50%;
+    border: 1px solid var(--color-border);
     background-color: var(--color-secondary);
     color: var(--color-white);
     font-weight: 700;
@@ -399,7 +423,7 @@ a:hover {
     margin-bottom: 1.5rem;
 }
 .process-step h3 { margin-bottom: 1rem; }
-.process-step p { color: var(--color-accent); margin: 0 auto; }
+.process-step p { margin: 0 auto; }
 
 .testimonial {
     text-align: center;
@@ -407,12 +431,15 @@ a:hover {
 .testimonial blockquote {
     font-size: 1.5rem;
     font-style: italic;
+    font-family: var(--font-family-serif);
     max-width: 80ch;
     margin: 0 auto;
     border: none;
+    color: var(--color-light);
 }
 .testimonial blockquote p {
     margin-bottom: 2rem;
+    color: var(--color-light);
 }
 .testimonial cite {
     font-style: normal;
@@ -433,9 +460,10 @@ a:hover {
 
 /* --- 10. Footer --- */
 .main-footer {
-    background-color: #08121d;
+    background-color: #000000;
     padding: 5rem 0 2rem 0;
     font-size: 0.95rem;
+    border-top: 1px solid var(--color-border);
 }
 .footer-grid {
     display: grid;
@@ -453,7 +481,7 @@ a:hover {
     margin-bottom: 1rem;
 }
 .footer-column h4 {
-    color: var(--color-white);
+    color: var(--color-light);
     margin-bottom: 1.5rem;
 }
 .footer-column ul {
@@ -471,8 +499,8 @@ a:hover {
 }
 .footer-bottom {
     text-align: center;
-    color: var(--color-secondary);
-    border-top: 1px solid var(--color-secondary);
+    color: var(--color-accent);
+    border-top: 1px solid var(--color-border);
     padding-top: 2rem;
 }
 
@@ -525,3 +553,4 @@ a:hover {
         padding-left: 0;
     }
 }
+
