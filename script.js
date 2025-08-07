@@ -322,14 +322,14 @@ const stickyHeader = {
         this.header = document.querySelector('.main-header');
         if (!this.header) return;
 
+        // Use GSAP's ScrollTrigger for a more robust scroll detection
         ScrollTrigger.create({
-            start: 'top -1',
-            end: '+=99999',
+            start: "top -10px",
             onUpdate: self => {
-                const shouldBeScrolled = self.progress > 0;
-                if (shouldBeScrolled !== this.isScrolled) {
-                    this.isScrolled = shouldBeScrolled;
-                    this.header.classList.toggle('is-scrolled', shouldBeScrolled);
+                const scrolled = self.direction === 1;
+                if (scrolled !== this.isScrolled) {
+                    this.isScrolled = scrolled;
+                    this.header.classList.toggle('is-scrolled', scrolled);
                 }
             }
         });

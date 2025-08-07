@@ -87,26 +87,26 @@
 
 /* --- 1. CSS Variables (Root) --- */
 :root {
-    --color-black: #0D0D0D;
-    --color-gray-dark: #1A1A1A;
-    --color-gray-medium: #999999;
-    --color-gray-light: #F5F5F5;
-    --color-white: #FFFFFF;
-    --color-background: var(--color-black);
-    --color-text-primary: var(--color-gray-light);
-    --color-text-secondary: var(--color-gray-medium);
+    --color-primary: #007BFF; /* A slightly more vibrant blue */
+    --color-primary-rgb: 0, 123, 255;
+    --color-background-dark: #0A0A0A; /* Darker, richer black */
+    --color-background-med: #141414;
+    --color-background-light: #1C1C1C;
+    --color-text-primary: #EAEAEA;
+    --color-text-secondary: #A0A0A0;
     --color-border: rgba(255, 255, 255, 0.1);
-    --color-border-hover: rgba(255, 255, 255, 0.25);
+    --color-border-translucent: rgba(255, 255, 255, 0.05);
     --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     --container-width: 1240px;
     --container-padding: 2rem;
-    --header-main-height: 90px;
-    --section-padding: 8rem 0;
-    --transition-smooth: 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+    --header-main-height: 80px; /* Slightly shorter header */
+    --section-padding: 7rem 0;
+    --transition-smooth: 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     --transition-bounce: 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    --focus-outline: 2px solid #00bfff;
-    --focus-shadow: 0 0 0 3px rgba(0,191,255,0.18);
+    --focus-outline: 2px solid var(--color-primary);
+    --focus-shadow: 0 0 0 4px rgba(var(--color-primary-rgb), 0.2);
     --z-header: 1000;
+    --z-hero-content: 3;
     --z-hero-overlay: 2;
     --z-hero-bg: 1;
     --z-backtotop: 2000;
@@ -121,10 +121,12 @@
 }
 html {
     scroll-behavior: smooth;
+    background-color: var(--color-background-dark); /* Set base background color */
 }
 body {
     font-family: var(--font-primary);
-    background-color: var(--color-background);
+    background-color: var(--color-background-dark);
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%231A1A1A' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
     color: var(--color-text-primary);
     line-height: 1.7;
     overflow-x: hidden;
@@ -196,11 +198,18 @@ a {
     top: 0;
     width: 100%;
     z-index: var(--z-header);
-    background-color: rgba(13, 13, 13, 0.85);
-    backdrop-filter: blur(12px);
-    box-shadow: 0 2px 16px 0 rgba(0,0,0,0.10);
-    transition: background 0.4s, box-shadow 0.4s;
+    background-color: rgba(10, 10, 10, 0.7); /* Darker, more translucent base */
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border-bottom: 1px solid var(--color-border-translucent);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
+
+.main-header.is-scrolled {
+    background-color: rgba(10, 10, 10, 0.85);
+    border-bottom: 1px solid var(--color-border);
+}
+
 .nav-container {
     display: flex;
     justify-content: space-between;
@@ -224,25 +233,40 @@ a {
     .nav-links { display: flex; }
 }
 .nav-links a {
-    color: var(--color-text-primary);
+    color: var(--color-text-secondary); /* Softer color for inactive links */
     font-weight: 500;
     position: relative;
-    padding: 0.75rem 0;
+    padding: 0.5rem 0.25rem;
+    transition: color 0.3s ease;
 }
+
+.nav-links a:hover,
+.nav-links a:focus-visible,
+.nav-links a[aria-current="page"] {
+    color: var(--color-text-primary);
+}
+
 .nav-links a::after {
     content: '';
     position: absolute;
-    bottom: 0;
-    left: 50%;
-    width: 0;
-    height: 2px;
-    background: var(--color-white);
-    transition: all var(--transition-smooth);
-    transform: translateX(-50%);
-}
-.nav-links a:hover::after,
-.nav-links a[aria-current="page"]::after {
+    bottom: -4px; /* Give it some space */
+    left: 0;
     width: 100%;
+    height: 2px;
+    background: var(--color-primary);
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.nav-links a:hover::after,
+.nav-links a:focus-visible::after {
+    transform: scaleX(1);
+}
+
+.nav-links a[aria-current="page"]::after {
+    transform: scaleX(1);
+    background: var(--color-text-primary); /* Different color for the current page */
 }
 .mobile-menu-toggle {
     display: none;
@@ -290,26 +314,52 @@ a {
 .hero {
     position: relative;
     display: flex;
-    align-items: flex-start;
-    min-height: 100vh;
-    padding: 0;
+    align-items: center; /* Vertically center content */
+    min-height: 90vh; /* Reduced height slightly */
+    padding: 6rem 0;
     overflow: hidden;
-    background: linear-gradient(120deg, #0d0d0d 0%, #232a34 100%);
-    perspective: 1000px;
+    background: transparent; /* The body now has the gradient */
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(ellipse at center, rgba(10, 10, 10, 0) 0%, var(--color-background-dark) 85%);
+    z-index: var(--z-hero-overlay);
+}
+
+#hero-canvas-container {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    z-index: var(--z-hero-bg);
+    opacity: 0.15; /* Softer particles */
+    pointer-events: none;
+    transition: opacity 0.7s var(--transition-smooth);
+}
+.hero-content {
+    position: relative;
+    z-index: var(--z-hero-content);
+    text-align: left;
+    padding-top: 0; /* Remove padding as we are using flex alignment */
+    padding-bottom: 0;
 }
 
 .hero-text-container {
-    max-width: 650px;
+    max-width: 700px; /* Wider for more impact */
     margin: 0;
 }
 
 .hero-headline-deconstruct {
-    font-size: clamp(3.5rem, 5vw, 4.5rem);
-    line-height: 1.1;
-    font-weight: 600;
-    letter-spacing: -0.02em;
+    font-size: clamp(3rem, 6vw, 5rem); /* Slightly adjusted size */
+    line-height: 1.15;
+    font-weight: 700; /* Bolder */
+    letter-spacing: -0.03em;
     margin-bottom: 2rem;
-    color: var(--color-white);
+    color: var(--color-text-primary);
 }
 
 .hero-headline-deconstruct span {
@@ -320,50 +370,30 @@ a {
 }
 
 .hero-headline-deconstruct .accent-text {
-    color: #0078d4;
-    text-shadow: 0 0 20px rgba(0, 120, 212, 0.3);
+    color: var(--color-primary);
+    text-shadow: 0 0 25px rgba(var(--color-primary-rgb), 0.3);
 }
-#hero-canvas-container {
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    z-index: var(--z-hero-bg);
-    opacity: 0.8;
-    pointer-events: none;
-    transition: opacity 0.7s var(--transition-smooth);
-}
-.hero-content {
-    position: relative;
-    z-index: var(--z-hero-overlay);
-    text-align: left;
-    padding-top: 8rem; /* Reduced from 10rem to move everything up */
-    padding-bottom: 8rem;
-}
-.hero h1 { 
-    margin-bottom: 1.5rem;
-    text-align: left;
-    max-width: 15ch;
-}
+
 .hero .subtitle {
-    font-size: 1.25rem;
-    max-width: 40ch;
+    font-size: 1.125rem; /* Slightly smaller for better hierarchy */
+    max-width: 55ch; /* More readable line length */
     margin: 0 0 2.5rem 0;
     text-align: left;
-    color: rgba(255, 255, 255, 0.95); /* Increased from 0.95 for better readability */
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-    line-height: 1.6;
+    color: var(--color-text-secondary);
+    line-height: 1.8;
 }
 
 /* --- 7. Buttons --- */
 .btn {
     display: inline-flex;
-    padding: 0.9rem 2rem;
+    padding: 0.9rem 2.2rem; /* Adjusted padding */
     border-radius: 8px;
     font-weight: 600;
     font-size: 1rem;
     cursor: pointer;
     border: 1px solid transparent;
-    transition: all var(--transition-bounce);
-    box-shadow: 0 2px 8px 0 rgba(0,0,0,0.10);
+    transition: all 0.3s ease; /* Smoother transition */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     will-change: transform, box-shadow;
     outline: none;
     min-width: 160px;
@@ -372,23 +402,30 @@ a {
 }
 .btn:hover, .btn:focus-visible {
     transform: translateY(-4px) scale(1.04);
-    box-shadow: 0 6px 24px 0 rgba(0,120,212,0.13);
+    box-shadow: 0 8px 25px rgba(var(--color-primary-rgb), 0.2);
     outline: var(--focus-outline);
     outline-offset: 2px;
 }
 .btn:active {
     transform: scale(0.98);
-    box-shadow: 0 1px 2px 0 rgba(0,0,0,0.10);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 .btn-primary {
-    background: var(--color-white);
-    color: var(--color-black);
+    background: var(--color-primary);
+    color: var(--color-white);
 }
-.btn-secondary {
+.btn-outline {
     background: transparent;
     border-color: var(--color-border);
     color: var(--color-text-primary);
 }
+
+.btn-outline:hover, .btn-outline:focus-visible {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: var(--color-white);
+}
+
 .cta-buttons {
     display: flex;
     justify-content: flex-start; /* Changed from center to flex-start */
@@ -595,7 +632,6 @@ a:focus, a:focus-visible, button:focus, button:focus-visible, input:focus, input
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 2.5rem;
-  padding: 2rem 0;
 }
 
 .service-card {
