@@ -1,3 +1,65 @@
+/* =============== EXPERTISE SECTION STYLES =============== */
+
+.expertise-section {
+    width: 100%;
+    padding: 80px 5%;
+    text-align: center;
+    background-color: #000;
+    color: #fff;
+}
+
+.expertise-header {
+    margin-bottom: 50px;
+}
+
+.expertise-header h2 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.expertise-header p {
+    font-size: 1.1rem;
+    color: #ccc;
+}
+
+.expertise-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.expertise-card {
+    background-color: #111;
+    padding: 40px;
+    border: 1px solid #222;
+    border-radius: 8px;
+    text-align: left;
+}
+
+.expertise-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+.expertise-card i {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    display: block;
+}
+
+@media (max-width: 768px) {
+    .expertise-grid {
+        grid-template-columns: 1fr;
+    }
+    .expertise-section {
+        padding: 60px 5%;
+    }
+    .expertise-header h2 {
+        font-size: 2.5rem;
+    }
+}
 /* --- About Page Story Section Upgrade --- */
 .story-container {
   max-width: 700px;
