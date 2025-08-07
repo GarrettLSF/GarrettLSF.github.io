@@ -599,9 +599,120 @@ a:focus, a:focus-visible, button:focus, button:focus-visible, input:focus, input
   box-shadow: 0 4px 24px rgba(0,0,0,0.25);
 }
 
-.sticky-cta.sticky-cta-hidden {
-  transform: translateY(200%);
-}
+  .sticky-cta.sticky-cta-hidden {
+    transform: translateY(200%);
+  }
+
+  .trust-signals-section {
+    background: var(--color-gray-dark);
+    padding: 4rem 0 3rem 0;
+  }
+
+  .trust-signals-container {
+      max-width: 900px;
+      text-align: center;
+  }
+
+  .trust-signals-title {
+      margin-bottom: 1.5rem;
+      color: #fff;
+  }
+
+  .trust-signals-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      list-style: none;
+      padding: 0;
+      margin: 0 auto 2.5rem auto;
+      max-width: 700px;
+  }
+
+  .trust-signals-list-item {
+      text-align: left;
+      color: #fff;
+      font-size: 1.13rem;
+  }
+
+  .trust-signals-button {
+      min-width: 220px;
+  }
+
+  .faq-section {
+      background: var(--color-gray-light);
+      padding: 4rem 0 3rem 0;
+  }
+
+  .faq-container {
+      max-width: 900px;
+  }
+
+  .faq-title {
+      text-align: center;
+      margin-bottom: 2rem;
+  }
+
+  .faq-list {
+      display: grid;
+      gap: 2rem;
+  }
+
+  .cta-section-bottom {
+      background: var(--color-black);
+      padding: 4rem 0 3rem 0;
+  }
+
+  .cta-container {
+      max-width: 700px;
+      text-align: center;
+  }
+
+  .cta-title {
+      margin-bottom: 1.2rem;
+      color: #fff;
+  }
+
+  .cta-text {
+      margin-bottom: 2.2rem;
+      color: #fff;
+  }
+
+  .cta-button {
+      min-width: 220px;
+  }
+
+  .principles-section .section-header {
+      margin-bottom: 3.5rem;
+      text-align: center;
+  }
+
+  .principles-section .section-header h2 {
+      margin-bottom: 1.2rem;
+  }
+
+  .principles-section .section-header p {
+      margin-bottom: 0;
+  }
+
+  .principles-grid {
+      gap: 2.5rem;
+  }
+
+  .principle-card {
+      padding: 2.5rem 2rem;
+  }
+
+  .principle-icon {
+      margin-bottom: 1.2rem;
+  }
+
+  .principle-card h3 {
+      margin-bottom: 0.7rem;
+  }
+
+  .principle-card p {
+      margin-bottom: 0;
+  }
 
 /* Hero Particle Effects */
 #hero-canvas-container canvas {
