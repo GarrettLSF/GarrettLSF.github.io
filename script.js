@@ -1,3 +1,37 @@
+// Scroll-reveal for fade/slide-in animations
+document.addEventListener('DOMContentLoaded', function() {
+  function revealOnScroll() {
+    var reveals = document.querySelectorAll('.anim-fade-in-up, .anim-slide-in-left, .anim-slide-in-right');
+    var windowHeight = window.innerHeight;
+    for (var i = 0; i < reveals.length; i++) {
+      var elementTop = reveals[i].getBoundingClientRect().top;
+      if (elementTop < windowHeight - 60) {
+        reveals[i].classList.add('visible');
+      }
+    }
+  }
+  window.addEventListener('scroll', revealOnScroll);
+  revealOnScroll();
+});
+
+// Back to Top Button
+document.addEventListener('DOMContentLoaded', function() {
+  var backToTop = document.createElement('button');
+  backToTop.id = 'backToTop';
+  backToTop.title = 'Back to Top';
+  backToTop.innerHTML = '↑';
+  document.body.appendChild(backToTop);
+  window.addEventListener('scroll', function() {
+    if (window.scrollY > 400) {
+      backToTop.style.display = 'flex';
+    } else {
+      backToTop.style.display = 'none';
+    }
+  });
+  backToTop.addEventListener('click', function() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+});
 /**
  * ===================================================================
  * Elite Install - Awwwards Edition Script (Reverted Nav)
@@ -30,6 +64,7 @@ const signatureInteraction = {
     init() {
         this.headline = document.querySelector('.hero-headline-deconstruct');
         if (!this.headline || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            if (this.headline) this.headline.style.opacity = 1;
             return;
         }
         this.splitText();
@@ -99,6 +134,9 @@ const scrollAnimator = {
                     start: 'top 85%',
                     toggleActions: 'play none none none',
                     once: true,
+                    onEnter: () => {
+                        el.classList.add('visible');
+                    }
                 }
             });
         });
@@ -140,6 +178,12 @@ const mobileNav = {
     },
     bindEvents() {
         this.elements.toggle.addEventListener('click', () => this.toggle());
+        this.elements.toggle.addEventListener('keydown', e => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                this.toggle();
+            }
+        });
     },
     toggle() {
         this.isOpen = !this.isOpen;
@@ -192,6 +236,7 @@ const hero2DBackground = {
     createCanvas(container) {
         this.canvas = document.createElement('canvas');
         this.ctx = this.canvas.getContext('2d', { alpha: true });
+        this.canvas.setAttribute('aria-hidden', 'true');
         container.appendChild(this.canvas);
         this.resizeCanvas();
     },
@@ -253,7 +298,31 @@ const App = {
             signatureInteraction.init();
             scrollAnimator.init();
             hero2DBackground.init();
-            
+
+            // Accessibility: focus management for skip link
+            const skipLink = document.querySelector('.skip-link');
+            if (skipLink) {
+                skipLink.addEventListener('click', e => {
+                    const main = document.querySelector('main, [role="main"]');
+                    if (main) {
+                        main.setAttribute('tabindex', '-1');
+                        main.focus();
+                        setTimeout(() => main.removeAttribute('tabindex'), 1000);
+                    }
+                });
+            }
+
+            // Back to Top: add focus-visible for accessibility
+            const backToTop = document.getElementById('backToTop');
+            if (backToTop) {
+                backToTop.addEventListener('keydown', e => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }
+                });
+            }
+
             console.log("Elite Install: Reverted Nav Edition Initialized.");
         } catch (error) {
             console.error("Elite Install Initialization Failed:", error);

@@ -30,6 +30,13 @@
     --section-padding: 8rem 0;
     --transition-smooth: 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
     --transition-bounce: 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    --focus-outline: 2px solid #00bfff;
+    --focus-shadow: 0 0 0 3px rgba(0,191,255,0.18);
+    --z-header: 1000;
+    --z-hero-overlay: 2;
+    --z-hero-bg: 1;
+    --z-backtotop: 2000;
+    --z-skiplink: 10000;
 }
 
 /* --- 2. Global Styles & Resets --- */
@@ -94,13 +101,16 @@ a {
     background: var(--color-white);
     color: var(--color-black);
     padding: 1rem 1.5rem;
-    z-index: 10000;
+    z-index: var(--z-skiplink);
     border-radius: 6px;
     font-weight: 600;
     transition: top 0.3s ease;
+    box-shadow: 0 2px 8px 0 rgba(0,0,0,0.10);
 }
-.skip-link:focus {
+.skip-link:focus, .skip-link:focus-visible {
     top: 1rem; /* Brings the link into view when it receives keyboard focus */
+    outline: var(--focus-outline);
+    box-shadow: 0 4px 24px 0 rgba(0,191,255,0.13);
 }
 
 .section {
@@ -111,9 +121,11 @@ a {
     position: sticky;
     top: 0;
     width: 100%;
-    z-index: 1000;
-    background-color: rgba(13, 13, 13, 0.8);
-    backdrop-filter: blur(10px);
+    z-index: var(--z-header);
+    background-color: rgba(13, 13, 13, 0.85);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 2px 16px 0 rgba(0,0,0,0.10);
+    transition: background 0.4s, box-shadow 0.4s;
 }
 .nav-container {
     display: flex;
@@ -202,16 +214,19 @@ a {
     min-height: 100vh;
     padding: 6rem 0;
     overflow: hidden;
+    background: linear-gradient(120deg, #0d0d0d 0%, #232a34 100%);
 }
 #hero-canvas-container {
     position: absolute;
     top: 0; left: 0; right: 0; bottom: 0;
-    z-index: 1;
+    z-index: var(--z-hero-bg);
     opacity: 0.8;
+    pointer-events: none;
+    transition: opacity 0.7s var(--transition-smooth);
 }
 .hero-content {
     position: relative;
-    z-index: 2;
+    z-index: var(--z-hero-overlay);
 }
 .hero h1 { margin-bottom: 1.5rem; }
 .hero .subtitle {
@@ -229,9 +244,19 @@ a {
     cursor: pointer;
     border: 1px solid transparent;
     transition: all var(--transition-bounce);
+    box-shadow: 0 2px 8px 0 rgba(0,0,0,0.10);
+    will-change: transform, box-shadow;
+    outline: none;
 }
-.btn:hover {
-    transform: translateY(-4px);
+.btn:hover, .btn:focus-visible {
+    transform: translateY(-4px) scale(1.04);
+    box-shadow: 0 6px 24px 0 rgba(0,120,212,0.13);
+    outline: var(--focus-outline);
+    outline-offset: 2px;
+}
+.btn:active {
+    transform: scale(0.98);
+    box-shadow: 0 1px 2px 0 rgba(0,0,0,0.10);
 }
 .btn-primary {
     background: var(--color-white);
@@ -288,8 +313,72 @@ a {
 .footer-column address { font-style: normal; line-height: 1.8; }
 .footer-bottom { text-align: center; padding-top: 3rem; border-top: 1px solid var(--color-border); }
 
-/* --- 10. Animation Primitives --- */
-.anim-fade-in-up { opacity: 0; transform: translateY(60px); }
+/* --- 10. Animation Primitives (Unified) --- */
+.anim-fade-in-up {
+    opacity: 0;
+    transform: translateY(60px);
+    transition: opacity 0.7s var(--transition-smooth), transform 0.7s var(--transition-smooth);
+    will-change: opacity, transform;
+}
+.anim-fade-in-up.visible {
+    opacity: 1;
+    transform: none;
+}
+.anim-slide-in-left {
+    opacity: 0;
+    transform: translateX(-60px);
+    transition: opacity 0.7s var(--transition-smooth), transform 0.7s var(--transition-smooth);
+    will-change: opacity, transform;
+}
+.anim-slide-in-left.visible {
+    opacity: 1;
+    transform: none;
+}
+.anim-slide-in-right {
+    opacity: 0;
+    transform: translateX(60px);
+    transition: opacity 0.7s var(--transition-smooth), transform 0.7s var(--transition-smooth);
+    will-change: opacity, transform;
+}
+.anim-slide-in-right.visible {
+    opacity: 1;
+    transform: none;
+}
+
+/* Focus and Accessibility */
+a:focus, a:focus-visible, button:focus, button:focus-visible, input:focus, input:focus-visible, textarea:focus, textarea:focus-visible {
+    outline: var(--focus-outline);
+    outline-offset: 2px;
+    box-shadow: var(--focus-shadow);
+    background: rgba(0,191,255,0.08);
+}
+
+/* Back to Top Button */
+#backToTop {
+  position: fixed;
+  bottom: 2.5rem;
+  right: 2.5rem;
+  z-index: var(--z-backtotop);
+  display: none;
+  background: #0078d4;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  font-size: 2rem;
+  box-shadow: 0 2px 8px 0 rgba(0,0,0,0.10);
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+  outline: none;
+}
+#backToTop:hover, #backToTop:focus-visible {
+  background: #005fa3;
+  transform: translateY(-4px) scale(1.08);
+  outline: var(--focus-outline);
+}
 
 /* --- 11. Accessibility Enhancements --- */
 @media (prefers-reduced-motion: reduce) {
