@@ -184,8 +184,8 @@
     <!-- =============== EXPERTISE SECTION =============== -->
     <section class="expertise-section">
     <div class="expertise-header">
-      <h2>Our Expertise</h2>
-      <p>Professionalism, and peace of mind.</p>
+  <h2>Our Expertise</h2>
+  <div class="expertise-subtitle-centered">Professionalism, and peace of mind.</div>
     </div>
     <div class="expertise-grid">
       <!-- Item 1 -->
@@ -219,7 +219,7 @@
     <!-- Trust Signals Section -->
     <section class="section trust-signals-section">
       <div class="container trust-signals-container">
-        <h2 class="trust-signals-title">The Elite Advantage</h2>
+  <h2 class="trust-signals-title">Why Choose Elite Install?</h2>
         <ul class="trust-signals-list">
           <li class="trust-signals-list-item">✔ Fully Insured & Certified Professionals</li>
           <li class="trust-signals-list-item">✔ Guaranteed 24-Hour Response Time</li>
@@ -233,23 +233,15 @@
     </section>
 
     <!-- Testimonial Section -->
-    <section class="section testimonial-section">
-        <div class="container">
-            <div class="testimonial-content">
-                <blockquote class="testimonial-quote">
-                    “Elite Install is the only partner we trust. Their professionalism and commitment to getting the job done right are second to none. They make us look good every single time.”
-                </blockquote>
-                <p class="testimonial-author"><span>John Davis</span> – Operations Manager, Texas School Furnishings</p>
-            </div>
-        </div>
-    </section>
 
     <!-- Principles Section -->
     <section class="section section-full-width section-accented principles-section">
         <div class="container principles-container">
             <div class="section-header anim-fade-in-up">
                 <h2>Our Commitment to You</h2>
-                <p>These principles define our work. They are the standards we bring to every project, ensuring a professional experience from our first conversation to the final walkthrough.</p>
+                <div class="principles-subtitle-centered">
+                  These principles define our work. They are the standards we bring to every project, ensuring a professional experience from our first conversation to the final walkthrough.
+                </div>
             </div>
             <div class="features-grid principles-grid">
                 <article class="feature-card anim-fade-in-up principle-card">
@@ -281,22 +273,48 @@
       <div class="container faq-container">
         <h2 class="faq-title">Frequently Asked Questions</h2>
         <div class="faq-list">
-          <div>
-            <h3>What areas do you serve?</h3>
-            <p>We serve Dallas, Houston, Austin, San Antonio, and West Texas.</p>
+          <div class="faq-accordion-container">
+            <div class="faq-accordion">
+              <button class="faq-question">What areas do you serve?<span class="faq-arrow">&#9662;</span></button>
+              <div class="faq-answer">
+                <p>We serve Dallas, Houston, Austin, San Antonio, and West Texas.</p>
+              </div>
+            </div>
+            <div class="faq-accordion">
+              <button class="faq-question">Are you insured and certified?<span class="faq-arrow">&#9662;</span></button>
+              <div class="faq-answer">
+                <p>Yes, our team is fully insured and certified for professional installations.</p>
+              </div>
+            </div>
+            <div class="faq-accordion">
+              <button class="faq-question">Do you offer project management?<span class="faq-arrow">&#9662;</span></button>
+              <div class="faq-answer">
+                <p>Absolutely. We handle delivery, scheduling, installation, and punch lists for a seamless experience.</p>
+              </div>
+            </div>
+            <div class="faq-accordion">
+              <button class="faq-question">How do I get a quote?<span class="faq-arrow">&#9662;</span></button>
+              <div class="faq-answer">
+                <p>Click any “Request a Quote” button or visit our Contact page to get started.</p>
+              </div>
+            </div>
           </div>
-          <div>
-            <h3>Are you insured and certified?</h3>
-            <p>Yes, our team is fully insured and certified for professional installations.</p>
-          </div>
-          <div>
-            <h3>Do you offer project management?</h3>
-            <p>Absolutely. We handle delivery, scheduling, installation, and punch lists for a seamless experience.</p>
-          </div>
-          <div>
-            <h3>How do I get a quote?</h3>
-            <p>Click any “Request a Quote” button or visit our Contact page to get started.</p>
-          </div>
+    <script>
+      // FAQ Accordion Functionality
+      document.addEventListener('DOMContentLoaded', function() {
+        var accordions = document.querySelectorAll('.faq-accordion');
+        accordions.forEach(function(acc) {
+          var btn = acc.querySelector('.faq-question');
+          btn.addEventListener('click', function() {
+            var open = acc.classList.contains('open');
+            // Close all
+            accordions.forEach(function(a) { a.classList.remove('open'); });
+            // Open this one if it was not open
+            if (!open) acc.classList.add('open');
+          });
+        });
+      });
+    </script>
         </div>
       </div>
     </section>
