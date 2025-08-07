@@ -1,37 +1,171 @@
-// Scroll-reveal for fade/slide-in animations
-document.addEventListener('DOMContentLoaded', function() {
-  function revealOnScroll() {
-    var reveals = document.querySelectorAll('.anim-fade-in-up, .anim-slide-in-left, .anim-slide-in-right');
-    var windowHeight = window.innerHeight;
-    for (var i = 0; i < reveals.length; i++) {
-      var elementTop = reveals[i].getBoundingClientRect().top;
-      if (elementTop < windowHeight - 60) {
-        reveals[i].classList.add('visible');
-      }
+// Scroll-reveal for fade/slide-in animations using Intersection Observer
+const createScrollReveal = () => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.querySelectorAll('.anim-fade-in-up, .anim-slide-in-left, .anim-slide-in-right').forEach(el => {
+            el.style.opacity = '1';
+            el.style.transform = 'none';
+        });
+        return;
     }
-  }
-  window.addEventListener('scroll', revealOnScroll);
-  revealOnScroll();
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const delay = entry.target.dataset.delay || 0;
+                setTimeout(() => {
+                    entry.target.classList.add('visible');
+                }, delay);
+            }
+        });
+    }, {
+        threshold: 0.15,
+        rootMargin: '50px'
+    });
+
+    document.querySelectorAll('.anim-fade-in-up, .anim-slide-in-left, .anim-slide-in-right').forEach(el => {
+        observer.observe(el);
+    });
+};
+
+document.addEventListener('DOMContentLoaded', createScrollReveal);
+
+// Main initialization
+document.addEventListener('DOMContentLoaded', function() {
+    initBackToTop();
+    initMobileNav();
+    initScrollAnimations();
+    initHeroCanvas();
 });
 
-// Back to Top Button
-document.addEventListener('DOMContentLoaded', function() {
-  var backToTop = document.createElement('button');
-  backToTop.id = 'backToTop';
-  backToTop.title = 'Back to Top';
-  backToTop.innerHTML = '↑';
-  document.body.appendChild(backToTop);
-  window.addEventListener('scroll', function() {
-    if (window.scrollY > 400) {
-      backToTop.style.display = 'flex';
-    } else {
-      backToTop.style.display = 'none';
+// Back to Top Button Implementation
+function initBackToTop() {
+    const backToTop = document.createElement('button');
+    backToTop.id = 'backToTop';
+    backToTop.title = 'Back to Top';
+    backToTop.innerHTML = '↑';
+    backToTop.setAttribute('aria-label', 'Scroll back to top');
+    document.body.appendChild(backToTop);
+
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 400) {
+            backToTop.classList.add('visible');
+        } else {
+            backToTop.classList.remove('visible');
+        }
+    }, { passive: true });
+
+    backToTop.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+}
+
+// Mobile Navigation Implementation
+function initMobileNav() {
+    const toggle = document.querySelector('.mobile-menu-toggle');
+    const nav = document.querySelector('#nav-links');
+    const body = document.body;
+
+    if (!toggle || !nav) return;
+
+    toggle.addEventListener('click', () => {
+        const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+        toggle.setAttribute('aria-expanded', !isExpanded);
+        nav.classList.toggle('active');
+        body.classList.toggle('mobile-nav-open');
+    });
+}
+
+// Scroll Animations
+function initScrollAnimations() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.querySelectorAll('.anim-fade-in-up').forEach(el => {
+            el.style.opacity = '1';
+            el.style.transform = 'none';
+        });
+        return;
     }
-  });
-  backToTop.addEventListener('click', function() {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
-});
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                const delay = entry.target.dataset.delay || 0;
+                setTimeout(() => {
+                    entry.target.style.transform = 'none';
+                    entry.target.style.opacity = '1';
+                }, delay);
+            }
+        });
+    }, {
+        threshold: 0.1,
+        rootMargin: '50px'
+    });
+
+    document.querySelectorAll('.anim-fade-in-up').forEach(el => observer.observe(el));
+}
+
+// Hero Canvas Background
+function initHeroCanvas() {
+    const container = document.getElementById('hero-canvas-container');
+    if (!container || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    canvas.style.width = '100%';
+    canvas.style.height = '100%';
+    container.appendChild(canvas);
+
+    let particles = [];
+    const particleCount = 50;
+    
+    function resizeCanvas() {
+        const rect = container.getBoundingClientRect();
+        canvas.width = rect.width;
+        canvas.height = rect.height;
+    }
+
+    function createParticles() {
+        particles = [];
+        for (let i = 0; i < particleCount; i++) {
+            particles.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                size: Math.random() * 2 + 1,
+                speedX: (Math.random() - 0.5) * 0.5,
+                speedY: (Math.random() - 0.5) * 0.5,
+                opacity: Math.random() * 0.5 + 0.2
+            });
+        }
+    }
+
+    function drawParticles() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach(particle => {
+            particle.x += particle.speedX;
+            particle.y += particle.speedY;
+
+            if (particle.x < 0) particle.x = canvas.width;
+            if (particle.x > canvas.width) particle.x = 0;
+            if (particle.y < 0) particle.y = canvas.height;
+            if (particle.y > canvas.height) particle.y = 0;
+
+            ctx.beginPath();
+            ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(255,255,255,${particle.opacity})`;
+            ctx.fill();
+        });
+        requestAnimationFrame(drawParticles);
+    }
+
+    resizeCanvas();
+    createParticles();
+    drawParticles();
+
+    window.addEventListener('resize', () => {
+        resizeCanvas();
+        createParticles();
+    });
+}
 /**
  * ===================================================================
  * Elite Install - Awwwards Edition Script (Reverted Nav)
