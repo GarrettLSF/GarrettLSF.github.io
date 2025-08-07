@@ -567,3 +567,38 @@ a {
     font-style: italic;
     color: var(--color-text-secondary);
 }
+
+/* --- 17. Header Action Buttons --- */
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.header-phone {
+    color: var(--color-text-primary);
+    font-weight: 500;
+    display: none; /* Hidden on mobile by default */
+}
+
+.btn-header-quote {
+    display: none; /* Hidden on mobile by default */
+}
+
+@media (min-width: 992px) {
+    /* Show on screens larger than tablets */
+    .header-phone {
+        display: inline-block;
+    }
+    .btn-header-quote {
+        display: inline-flex;
+        padding: 0.75rem 1.5rem; /* Make it a little smaller than other buttons */
+    }
+}
+
+@media (max-width: 768px) {
+    .header-actions {
+        gap: 1rem; /* Adjust gap for mobile */
+    }
+}
