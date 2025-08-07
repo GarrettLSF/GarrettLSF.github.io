@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- SEO-Optimized Meta Tags -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us | Elite Install | Our Story</title>
     <meta name="description" content="Learn about Elite Install, a Dallas-based furniture installation company founded on project management experience to provide a better, more reliable partnership for Texas dealers.">
 
-    <!-- Favicon Links -->
     <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
@@ -16,21 +14,45 @@
     <meta name="msapplication-TileColor" content="#0d0d0d">
     <meta name="theme-color" content="#0d0d0d">
 
-    <!-- Canonical URL -->
     <link rel="canonical" href="https://www.eliteinstallandhaul.com/about.html">
 
-    <!-- Stylesheet -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <a href="#main-content" class="skip-link">Skip to main content</a>
     
-    <!-- Header will be loaded here by script.js -->
-    <div id="header-placeholder"></div>
+    <header class="main-header" role="banner">
+        <div class="header-main-nav">
+            <div class="container nav-container">
+                <a href="index.html" class="logo" aria-label="Elite Install & Haul - Home">
+                    <img src="images/logo.svg" alt="Elite Install & Haul Logo" class="site-logo-image" width="180" height="38">
+                </a>
+                <nav class="primary-navigation" aria-label="Main Navigation">
+                    <button class="mobile-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-links" aria-haspopup="true">
+                        <svg class="icon-open" width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <path d="M3 12H21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            <path d="M3 6H21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            <path d="M3 18H21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                        <svg class="icon-close" width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <path d="M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            <path d="M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </button>
+                    <ul class="nav-links" id="nav-links" role="menubar">
+                        <li role="none"><a href="index.html" role="menuitem">Home</a></li>
+                        <li role="none"><a href="about.html" role="menuitem" aria-current="page">About</a></li>
+                        <li role="none"><a href="services.html" role="menuitem">Services</a></li>
+                        <li role="none"><a href="projects.html" role="menuitem">Projects</a></li>
+                        <li role="none"><a href="contact.html" role="menuitem">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
 
     <main id="main-content">
 
-        <!-- Page Header -->
         <section class="hero page-hero">
             <div class="container hero-content">
                 <h1 class="anim-fade-in-up">Built From Experience. Designed For You.</h1>
@@ -38,7 +60,6 @@
             </div>
         </section>
 
-        <!-- Main Story Section -->
         <section class="section">
             <div class="container story-container">
                 <div class="section-header anim-fade-in-up">
@@ -54,7 +75,6 @@
             </div>
         </section>
 
-        <!-- Core Commitments Section (Reusing from index.html for consistency) -->
         <section class="section section-accented principles-section">
             <div class="container">
                 <div class="section-header anim-fade-in-up">
@@ -86,7 +106,6 @@
             </div>
         </section>
 
-        <!-- Final Call to Action -->
         <section class="cta-section anim-fade-in-up">
             <div class="container">
                 <h2>Ready for a True Partnership?</h2>
@@ -97,16 +116,42 @@
 
     </main>
 
-    <!-- Footer will be loaded here by script.js -->
-    <div id="footer-placeholder"></div>
+    <footer class="main-footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column about">
+                    <a href="index.html" class="footer-logo" aria-label="Elite Install & Haul - Home">
+                        <img src="images/logo.svg" alt="Elite Install & Haul Logo" class="site-logo-image-footer" width="180" height="38">
+                    </a>
+                    <p>The B2B installation partner delivering professional execution, proactive communication, and unwavering reliability for school furniture dealers in Texas.</p>
+                </div>
+                <nav class="footer-column links" aria-labelledby="footer-nav-heading">
+                    <h4 id="footer-nav-heading">Navigate</h4>
+                    <ul role="list">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="services.html">Our Services</a></li>
+                        <li><a href="projects.html">View Our Work</a></li>
+                        <li><a href="contact.html">Become a Partner</a></li>
+                    </ul>
+                </nav>
+                <div class="footer-column contact" aria-labelledby="footer-contact-heading">
+                    <h4 id="footer-contact-heading">Get In Touch</h4>
+                    <address>
+                        <a href="tel:+14693801551" aria-label="Call us at 469-380-1551">(469) 380-1551</a><br>
+                        <a href="mailto:tylerherrick13@gmail.com" aria-label="Email us at tylerherrick13@gmail.com">tylerherrick13@gmail.com</a><br>
+                        <span>Serving Dallas, Houston, Austin, & San Antonio.</span>
+                    </address>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Elite Install & Haul. Your Reputation, Installed.</p>
+            </div>
+        </div>
+    </footer>
 
-    <!-- GSAP & Three.js Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     
-    <!-- Main Application Script -->
     <script src="script.js" defer></script>
 </body>
 </html>
-
