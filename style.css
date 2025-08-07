@@ -175,7 +175,7 @@ a:hover { color: var(--color-white); }
     align-items: center; height: var(--header-height);
 }
 .main-header.is-scrolled {
-    background-color: rgba(18, 18, 18, 0.85);
+    background-color: rgba(13, 13, 13, 0.85); /* Slightly darker than body for depth */
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--color-border);
@@ -211,7 +211,7 @@ a:hover { color: var(--color-white); }
 .hero {
     position: relative; display: flex;
     align-items: center; text-align: center;
-    min-height: calc(100vh - 120px);
+    min-height: calc(100vh - 120px); /* Adjust for utility header height */
     padding: 8rem 0;
 }
 #hero-canvas-container {
@@ -309,8 +309,8 @@ a:hover { color: var(--color-white); }
 .process-steps-wrapper {
     display: flex;
     flex-wrap: nowrap;
-    width: max-content;
-    padding: 5rem 0;
+    width: max-content; /* Critical for horizontal scroll */
+    height: 100%;
 }
 .process-step {
     width: 90vw; /* Each step takes up most of the viewport width */
@@ -378,7 +378,8 @@ a:hover { color: var(--color-white); }
 
 
 /* --- 10. Contact Page & Form --- */
-/* (Assuming styles are similar and will work with existing contact.html) */
+/* Styles for contact page elements will inherit gracefully.
+   Specific grid and form styles from previous version can be used. */
 
 
 /* --- 11. Footer --- */
