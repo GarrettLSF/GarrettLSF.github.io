@@ -85,17 +85,27 @@ a {
     margin: 0 auto;
     padding: 0 var(--container-padding);
 }
+
+/* ADD THESE STYLES FOR THE SKIP LINK */
+.skip-link {
+    position: absolute;
+    top: -100px; /* Hides the link off-screen */
+    left: 1rem;
+    background: var(--color-white);
+    color: var(--color-black);
+    padding: 1rem 1.5rem;
+    z-index: 10000;
+    border-radius: 6px;
+    font-weight: 600;
+    transition: top 0.3s ease;
+}
+.skip-link:focus {
+    top: 1rem; /* Brings the link into view when it receives keyboard focus */
+}
+
 .section {
     padding: var(--section-padding);
 }
-.section-header {
-    text-align: center;
-    margin: 0 auto 5rem auto;
-    max-width: 800px;
-}
-.section-header h2 { margin-bottom: 1.5rem; }
-.skip-link:focus { top: 1rem; }
-
 /* --- 5. Header & Navigation (Reverted) --- */
 .main-header {
     position: sticky;
