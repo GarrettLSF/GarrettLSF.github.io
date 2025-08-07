@@ -1,22 +1,24 @@
 /**
  * ===================================================================
  * Elite Install - Performance-Optimized Professional JavaScript
- * Version: 7.0 (High-Performance 2D Implementation)
+ * Version: 8.0 (Stabilized & Simplified)
  * ===================================================================
  *
  * This script implements award-worthy interactions with a focus on
  * performance, accessibility, and smooth user experience. All 3D
  * elements have been replaced with optimized 2D animations.
  *
+ * Simplified architecture by removing the dynamic component loader
+ * to increase reliability and reduce points of failure.
+ *
  * TABLE OF CONTENTS
  * 1.  Performance-First App Initialization
- * 2.  Module: Efficient Component Loader
- * 3.  Module: Optimized Mobile Navigation
- * 4.  Module: Lightweight Sticky Header
- * 5.  Module: High-Performance Scroll Animations
- * 6.  Module: Smooth Horizontal Process Scroll
- * 7.  Module: 2D Hero Background Animation
- * 8.  Module: Micro-interactions & Polish
+ * 2.  Module: Optimized Mobile Navigation
+ * 3.  Module: Lightweight Sticky Header
+ * 4.  Module: High-Performance Scroll Animations
+ * 5.  Module: Smooth Horizontal Process Scroll
+ * 6.  Module: 2D Hero Background Animation
+ * 7.  Module: Micro-interactions & Polish
  *
  * ===================================================================
  */
@@ -31,9 +33,8 @@
         
         async init() {
             try {
-                // Prioritize critical path loading
-                await this.loadCriticalComponents();
-                await this.initializeInteractions();
+                // Initialize interactions now that dependencies are guaranteed
+                this.initializeInteractions();
                 this.logPerformanceMetrics();
                 this.isInitialized = true;
             } catch (error) {
@@ -41,20 +42,15 @@
             }
         },
 
-        async loadCriticalComponents() {
-            // Load header/footer concurrently for faster page load
-            await componentLoader.load();
-        },
-
         async initializeInteractions() {
             // Check dependencies once
             if (!this.checkDependencies()) {
-                throw new Error('Required libraries not loaded');
+                throw new Error('Required libraries (GSAP, ScrollTrigger) not loaded. Make sure the script tags are in your HTML.');
             }
 
             gsap.registerPlugin(ScrollTrigger);
             
-            // Initialize modules in performance order
+            // Initialize all modules
             mobileNav.init();
             stickyHeader.init();
             hero2DBackground.init();
@@ -78,44 +74,7 @@
         }
     };
 
-    // --- 2. Module: Efficient Component Loader ---
-    const componentLoader = {
-        cache: new Map(),
-        
-        async load() {
-            const promises = [
-                this.loadComponent('header.html', 'header-placeholder'),
-                this.loadComponent('footer.html', 'footer-placeholder')
-            ];
-            
-            await Promise.allSettled(promises);
-            // Small delay to ensure DOM updates
-            return new Promise(resolve => requestAnimationFrame(resolve));
-        },
-
-        async loadComponent(url, placeholderId) {
-            const placeholder = document.getElementById(placeholderId);
-            if (!placeholder) return;
-
-            try {
-                let html = this.cache.get(url);
-                
-                if (!html) {
-                    const response = await fetch(url);
-                    if (!response.ok) throw new Error(`Failed to load ${url}`);
-                    html = await response.text();
-                    this.cache.set(url, html);
-                }
-                
-                placeholder.outerHTML = html;
-            } catch (error) {
-                console.warn(`Component loading failed: ${url}`);
-                placeholder.innerHTML = '<div style="display: none;"></div>';
-            }
-        }
-    };
-
-    // --- 3. Module: Optimized Mobile Navigation ---
+    // --- 2. Module: Optimized Mobile Navigation ---
     const mobileNav = {
         elements: {},
         isOpen: false,
@@ -133,7 +92,7 @@
                 toggle: document.querySelector('.mobile-menu-toggle'),
                 nav: document.querySelector('#nav-links'),
                 body: document.body,
-                focusable: null // Will be set after nav is found
+                focusable: null
             };
             
             if (this.elements.nav) {
@@ -144,19 +103,14 @@
         },
 
         bindEvents() {
-            // Use passive listeners where possible
             this.elements.toggle.addEventListener('click', this.toggle.bind(this));
             document.addEventListener('keydown', this.handleKeydown.bind(this));
-            
-            // Close on outside click (debounced)
             document.addEventListener('click', this.debounce(this.handleOutsideClick.bind(this), 10));
             
-            // Close on link click
             this.elements.focusable?.forEach(link => {
                 link.addEventListener('click', () => this.isOpen && this.close());
             });
 
-            // Handle resize
             window.addEventListener('resize', this.debounce(() => {
                 if (window.innerWidth > 768 && this.isOpen) this.close();
             }, 100), { passive: true });
@@ -175,8 +129,6 @@
             this.isOpen = true;
             this.elements.body.classList.add('mobile-nav-open');
             this.elements.toggle.setAttribute('aria-expanded', 'true');
-            
-            // Focus first link on next frame
             requestAnimationFrame(() => {
                 this.elements.focusable?.[0]?.focus();
             });
@@ -215,7 +167,7 @@
         }
     };
 
-    // --- 4. Module: Lightweight Sticky Header ---
+    // --- 3. Module: Lightweight Sticky Header ---
     const stickyHeader = {
         header: null,
         lastScrollY: 0,
@@ -245,7 +197,6 @@
 
         addSmartScroll() {
             let ticking = false;
-
             const handleScroll = () => {
                 if (!ticking) {
                     requestAnimationFrame(() => {
@@ -265,21 +216,17 @@
                     ticking = true;
                 }
             };
-
             window.addEventListener('scroll', handleScroll, { passive: true });
         }
     };
 
-    // --- 5. Module: High-Performance Scroll Animations ---
+    // --- 4. Module: High-Performance Scroll Animations ---
     const scrollAnimator = {
-        animatedElements: [],
-        
         init() {
             if (this.prefersReducedMotion()) {
                 this.disableAnimations();
                 return;
             }
-
             this.createScrollAnimations();
             this.createStaggeredAnimations();
         },
@@ -290,10 +237,8 @@
 
         createScrollAnimations() {
             const elements = document.querySelectorAll('.anim-fade-in-up');
-            
             elements.forEach(el => {
                 const delay = parseFloat(el.dataset.delay || 0) / 1000;
-                
                 gsap.to(el, {
                     opacity: 1,
                     y: 0,
@@ -303,7 +248,7 @@
                     scrollTrigger: {
                         trigger: el,
                         start: 'top 85%',
-                        toggleActions: 'play none none reverse'
+                        toggleActions: 'play none none none' // Play once and stay
                     }
                 });
             });
@@ -314,28 +259,31 @@
             if (!featureCards.length) return;
 
             gsap.set(featureCards, { opacity: 0, y: 40 });
-            
             ScrollTrigger.batch(featureCards, {
-                onEnter: elements => {
-                    gsap.to(elements, {
+                onEnter: batch => {
+                    gsap.to(batch, {
                         opacity: 1,
                         y: 0,
                         duration: 0.6,
                         ease: 'power2.out',
-                        stagger: 0.1
+                        stagger: {
+                            each: 0.1,
+                            from: "start"
+                        }
                     });
                 },
-                start: 'top 80%'
+                start: 'top 80%',
+                once: true // Animate them once
             });
         },
 
         disableAnimations() {
-            const elements = document.querySelectorAll('.anim-fade-in-up');
+            const elements = document.querySelectorAll('.anim-fade-in-up, .feature-card');
             gsap.set(elements, { opacity: 1, y: 0 });
         }
     };
 
-    // --- 6. Module: Smooth Horizontal Process Scroll ---
+    // --- 5. Module: Smooth Horizontal Process Scroll ---
     const horizontalProcessScroll = {
         container: null,
         wrapper: null,
@@ -343,10 +291,8 @@
         init() {
             this.container = document.querySelector('.process-section-container');
             this.wrapper = document.querySelector('.process-steps-wrapper');
-            
             if (!this.container || !this.wrapper) return;
-
-            // Delay to ensure layout is complete
+            
             requestAnimationFrame(() => {
                 setTimeout(() => this.createScrollAnimation(), 100);
             });
@@ -369,38 +315,21 @@
                     invalidateOnRefresh: true
                 }
             });
-
-            this.addKeyboardSupport();
-        },
-
-        addKeyboardSupport() {
-            const scrollArea = this.container.querySelector('.process-horizontal-scroll');
-            if (!scrollArea) return;
-
-            scrollArea.setAttribute('tabindex', '0');
-            scrollArea.addEventListener('keydown', event => {
-                if (event.key === 'ArrowLeft') {
-                    event.preventDefault();
-                    window.scrollBy({ top: -50, behavior: 'smooth' });
-                } else if (event.key === 'ArrowRight') {
-                    event.preventDefault();
-                    window.scrollBy({ top: 50, behavior: 'smooth' });
-                }
-            });
         }
     };
 
-    // --- 7. Module: 2D Hero Background Animation ---
+    // --- 6. Module: 2D Hero Background Animation ---
     const hero2DBackground = {
         canvas: null,
         ctx: null,
         particles: [],
         animationId: null,
         mouse: { x: 0, y: 0 },
-        
+        isVisible: false,
+
         init() {
             const container = document.getElementById('hero-canvas-container');
-            if (!container) return;
+            if (!container || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
             this.createCanvas(container);
             this.createParticles();
@@ -411,131 +340,67 @@
         createCanvas(container) {
             this.canvas = document.createElement('canvas');
             this.ctx = this.canvas.getContext('2d', { alpha: true });
-            
-            this.resizeCanvas();
             container.appendChild(this.canvas);
+            this.resizeCanvas();
         },
 
         resizeCanvas() {
             const rect = this.canvas.parentElement.getBoundingClientRect();
             const dpr = Math.min(window.devicePixelRatio || 1, 2);
-            
             this.canvas.width = rect.width * dpr;
             this.canvas.height = rect.height * dpr;
             this.canvas.style.width = rect.width + 'px';
             this.canvas.style.height = rect.height + 'px';
-            
             this.ctx.scale(dpr, dpr);
             this.width = rect.width;
             this.height = rect.height;
         },
 
         createParticles() {
-            const count = Math.min(50, Math.floor(this.width / 20)); // Adaptive count
+            const count = Math.min(50, Math.floor(this.width / 25));
             this.particles = [];
-            
             for (let i = 0; i < count; i++) {
                 this.particles.push({
                     x: Math.random() * this.width,
                     y: Math.random() * this.height,
-                    vx: (Math.random() - 0.5) * 0.5,
-                    vy: (Math.random() - 0.5) * 0.5,
+                    vx: (Math.random() - 0.5) * 0.4,
+                    vy: (Math.random() - 0.5) * 0.4,
                     size: Math.random() * 2 + 1,
-                    opacity: Math.random() * 0.5 + 0.2,
-                    originalX: 0,
-                    originalY: 0
+                    opacity: Math.random() * 0.4 + 0.1
                 });
-                
-                // Store original position for mouse interaction
-                const particle = this.particles[this.particles.length - 1];
-                particle.originalX = particle.x;
-                particle.originalY = particle.y;
             }
         },
 
         addEventListeners() {
-            const container = this.canvas.parentElement;
-            
-            // Throttled mouse movement
-            let mouseMoveTimeout;
-            container.addEventListener('mousemove', event => {
-                const rect = container.getBoundingClientRect();
-                this.mouse.x = event.clientX - rect.left;
-                this.mouse.y = event.clientY - rect.top;
-                
-                clearTimeout(mouseMoveTimeout);
-                mouseMoveTimeout = setTimeout(() => {
-                    this.mouse.x = this.width / 2;
-                    this.mouse.y = this.height / 2;
-                }, 2000);
-            }, { passive: true });
-
-            // Resize handling
+            const observer = new IntersectionObserver(entries => {
+                this.isVisible = entries[0].isIntersecting;
+            }, { threshold: 0.01 });
+            observer.observe(this.canvas.parentElement);
             window.addEventListener('resize', this.debounce(() => {
                 this.resizeCanvas();
                 this.createParticles();
             }, 250), { passive: true });
-
-            // Intersection Observer for performance
-            const observer = new IntersectionObserver(entries => {
-                this.isVisible = entries[0].isIntersecting;
-            }, { threshold: 0.1 });
-            
-            observer.observe(container);
         },
 
         startAnimation() {
-            let lastTime = 0;
-            const fps = 30; // Reduced FPS for better performance
-            const interval = 1000 / fps;
-            
-            const animate = currentTime => {
+            const animate = () => {
                 this.animationId = requestAnimationFrame(animate);
-                
-                if (currentTime - lastTime < interval) return;
                 if (!this.isVisible) return;
-                
-                lastTime = currentTime;
-                this.updateParticles();
                 this.drawParticles();
             };
-            
-            this.isVisible = true;
-            animate(0);
-        },
-
-        updateParticles() {
-            this.particles.forEach(particle => {
-                // Subtle movement
-                particle.x += particle.vx;
-                particle.y += particle.vy;
-                
-                // Mouse interaction (reduced intensity)
-                const dx = this.mouse.x - particle.x;
-                const dy = this.mouse.y - particle.y;
-                const distance = Math.sqrt(dx * dx + dy * dy);
-                
-                if (distance < 100) {
-                    const force = (100 - distance) / 100 * 0.02;
-                    particle.x -= dx * force;
-                    particle.y -= dy * force;
-                }
-                
-                // Boundaries with wrapping
-                if (particle.x < 0) particle.x = this.width;
-                if (particle.x > this.width) particle.x = 0;
-                if (particle.y < 0) particle.y = this.height;
-                if (particle.y > this.height) particle.y = 0;
-            });
+            animate();
         },
 
         drawParticles() {
             this.ctx.clearRect(0, 0, this.width, this.height);
-            
-            this.particles.forEach(particle => {
+            this.particles.forEach(p => {
+                p.x += p.vx;
+                p.y += p.vy;
+                if (p.x < 0 || p.x > this.width) p.vx *= -1;
+                if (p.y < 0 || p.y > this.height) p.vy *= -1;
                 this.ctx.beginPath();
-                this.ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-                this.ctx.fillStyle = `rgba(255, 255, 255, ${particle.opacity})`;
+                this.ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                this.ctx.fillStyle = `rgba(255, 255, 255, ${p.opacity})`;
                 this.ctx.fill();
             });
         },
@@ -549,7 +414,7 @@
         }
     };
 
-    // --- 8. Module: Micro-interactions & Polish ---
+    // --- 7. Module: Micro-interactions & Polish ---
     const microInteractions = {
         init() {
             this.initButtonEffects();
@@ -558,74 +423,28 @@
         },
 
         initButtonEffects() {
-            const buttons = document.querySelectorAll('.btn');
-            
-            buttons.forEach(btn => {
-                btn.addEventListener('mouseenter', () => {
-                    gsap.to(btn, { scale: 1.02, duration: 0.2, ease: 'power2.out' });
-                }, { passive: true });
-                
-                btn.addEventListener('mouseleave', () => {
-                    gsap.to(btn, { scale: 1, duration: 0.2, ease: 'power2.out' });
-                }, { passive: true });
-                
-                btn.addEventListener('mousedown', () => {
-                    gsap.to(btn, { scale: 0.98, duration: 0.1 });
-                }, { passive: true });
-                
-                btn.addEventListener('mouseup', () => {
-                    gsap.to(btn, { scale: 1.02, duration: 0.1 });
-                }, { passive: true });
+            document.querySelectorAll('.btn').forEach(btn => {
+                btn.addEventListener('mouseenter', () => gsap.to(btn, { scale: 1.03, duration: 0.2, ease: 'power2.out' }));
+                btn.addEventListener('mouseleave', () => gsap.to(btn, { scale: 1, duration: 0.2, ease: 'power2.out' }));
             });
         },
 
         initCardEffects() {
-            const cards = document.querySelectorAll('.feature-card');
-            
-            cards.forEach(card => {
+            document.querySelectorAll('.feature-card').forEach(card => {
                 const icon = card.querySelector('.feature-icon');
-                
                 card.addEventListener('mouseenter', () => {
-                    if (icon) {
-                        gsap.to(icon, { 
-                            scale: 1.05, 
-                            duration: 0.3, 
-                            ease: 'back.out(1.4)' 
-                        });
-                    }
-                }, { passive: true });
-                
+                    if (icon) gsap.to(icon, { scale: 1.05, duration: 0.3, ease: 'back.out(1.4)' });
+                });
                 card.addEventListener('mouseleave', () => {
-                    if (icon) {
-                        gsap.to(icon, { 
-                            scale: 1, 
-                            duration: 0.3, 
-                            ease: 'back.out(1.4)' 
-                        });
-                    }
-                }, { passive: true });
+                    if (icon) gsap.to(icon, { scale: 1, duration: 0.3, ease: 'back.out(1.4)' });
+                });
             });
         },
 
         initFormEnhancements() {
-            const inputs = document.querySelectorAll('input, textarea');
-            
-            inputs.forEach(input => {
-                input.addEventListener('focus', () => {
-                    gsap.to(input, { 
-                        borderColor: '#FFFFFF', 
-                        boxShadow: '0 0 0 3px rgba(255,255,255,0.1)',
-                        duration: 0.2 
-                    });
-                });
-                
-                input.addEventListener('blur', () => {
-                    gsap.to(input, { 
-                        borderColor: 'rgba(255,255,255,0.1)', 
-                        boxShadow: 'none',
-                        duration: 0.2 
-                    });
-                });
+            document.querySelectorAll('input, textarea').forEach(input => {
+                input.addEventListener('focus', () => gsap.to(input, { borderColor: '#FFFFFF', boxShadow: '0 0 0 3px rgba(255,255,255,0.1)', duration: 0.2 }));
+                input.addEventListener('blur', () => gsap.to(input, { borderColor: 'rgba(255,255,255,0.1)', boxShadow: 'none', duration: 0.2 }));
             });
         }
     };
