@@ -15,7 +15,60 @@
     <meta name="msapplication-TileColor" content="#0d0d0d">
     <meta name="theme-color" content="#0d0d0d">
 
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Elite Install | Texas Furniture Installation | Dallas, TX">
+    <meta property="og:description" content="Elite Install is a professional B2B partner for school furniture dealers in Dallas and across Texas, providing reliable, expert installation of educational and FF&E furniture.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.eliteinstallandhaul.com/">
+    <meta property="og:image" content="https://www.eliteinstallandhaul.com/images/logo.svg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Elite Install | Texas Furniture Installation | Dallas, TX">
+    <meta name="twitter:description" content="Elite Install is a professional B2B partner for school furniture dealers in Dallas and across Texas, providing reliable, expert installation of educational and FF&E furniture.">
+    <meta name="twitter:image" content="https://www.eliteinstallandhaul.com/images/logo.svg">
+
     <link rel="canonical" href="https://www.eliteinstallandhaul.com/">
+
+    <!-- FAQ Schema for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What areas do you serve?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We serve Dallas, Houston, Austin, San Antonio, and West Texas."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What types of furniture do you install?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We install educational, commercial, and FF&E furniture for schools and businesses."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Are you insured and certified?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, we are fully insured and our team is certified for professional installations."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I request a quote?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Simply use the 'Request a Free Quote' button or visit our Contact page."
+          }
+        }
+      ]
+    }
+    </script>
 
     <link rel="stylesheet" href="style.css">
 
@@ -79,11 +132,11 @@
     
     <header class="main-header">
         <nav class="nav-container container">
-            <a href="index.html" class="logo">
+            <a href="/" class="logo">
                 <img src="images/logo.svg" alt="Elite Install Logo" class="site-logo-image" width="180" height="38">
             </a>
             <ul class="nav-links" id="nav-links">
-                <li><a href="index.html" aria-current="page">Home</a></li>
+                <li><a href="/" aria-current="page">Home</a></li>
                 <li><a href="about.html">About</a></li>
                 <li><a href="services.html">Services</a></li>
                 <li><a href="projects.html">Projects</a></li>
@@ -97,6 +150,18 @@
     </header>
 
     <main id="main-content">
+
+        <!-- Sticky CTA Button for Mobile -->
+        <a href="contact.html" class="sticky-cta" style="position:fixed;bottom:24px;right:24px;z-index:1000;display:none;padding:1em 2em;background:#0078d4;color:#fff;border-radius:32px;font-weight:bold;box-shadow:0 2px 8px rgba(0,0,0,0.15);text-decoration:none;transition:background 0.2s;">Request a Quote</a>
+        <script>
+        // Show sticky CTA on mobile only
+        function toggleStickyCTA() {
+          var cta = document.querySelector('.sticky-cta');
+          if(window.innerWidth < 800) { cta.style.display = 'block'; } else { cta.style.display = 'none'; }
+        }
+        window.addEventListener('resize', toggleStickyCTA);
+        window.addEventListener('DOMContentLoaded', toggleStickyCTA);
+        </script>
 
         <section class="hero">
     <div id="hero-canvas-container"></div>
@@ -155,7 +220,7 @@
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-column about">
-                    <a href="index.html" class="footer-logo" aria-label="Elite Install & Haul - Home">
+                    <a href="/" class="footer-logo" aria-label="Elite Install & Haul - Home">
                         <img src="images/logo.svg" alt="Elite Install & Haul Logo" class="site-logo-image-footer" width="180" height="38">
                     </a>
                     <p>The B2B installation partner delivering professional execution, proactive communication, and unwavering reliability for school furniture dealers in Texas.</p>
@@ -167,6 +232,8 @@
                         <li><a href="services.html">Our Services</a></li>
                         <li><a href="projects.html">View Our Work</a></li>
                         <li><a href="contact.html">Become a Partner</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Terms of Service</a></li>
                     </ul>
                 </nav>
                 <div class="footer-column contact" aria-labelledby="footer-contact-heading">
