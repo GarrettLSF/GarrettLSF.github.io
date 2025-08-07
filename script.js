@@ -1,7 +1,7 @@
 /**
  * ===================================================================
  * Elite Install - Professional UI/UX Overhaul
- * Version: 5.0 (Final Professional Build)
+ * Version: 5.1 (Final Professional Build)
  * ===================================================================
  *
  * This script implements a refined and professional design, correcting
