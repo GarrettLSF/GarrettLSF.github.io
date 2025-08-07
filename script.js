@@ -126,12 +126,12 @@ const scrollAnimator = {
             gsap.to(el, {
                 opacity: 1,
                 y: 0,
-                duration: 0.8,
+                duration: 0.38, // faster fade-in
                 ease: 'power2.out',
                 delay: parseFloat(el.dataset.delay || 0) / 1000,
                 scrollTrigger: {
                     trigger: el,
-                    start: 'top 85%',
+                    start: 'top 98%', // reveal much earlier
                     toggleActions: 'play none none none',
                     once: true,
                     onEnter: () => {
@@ -147,9 +147,9 @@ const scrollAnimator = {
             gsap.set(card, { autoAlpha: 0, y: 50 });
             ScrollTrigger.create({
                 trigger: card,
-                start: 'top 85%',
+                start: 'top 98%', // reveal much earlier
                 once: true,
-                onEnter: () => gsap.to(card, { autoAlpha: 1, y: 0, duration: 0.8, ease: 'power2.out' }),
+                onEnter: () => gsap.to(card, { autoAlpha: 1, y: 0, duration: 0.38, ease: 'power2.out' }), // faster
             });
         });
     },

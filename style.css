@@ -1,3 +1,38 @@
+/* --- About Page Story Section Upgrade --- */
+.story-container {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 2.5rem 1.5rem;
+  background: rgba(255,255,255,0.04);
+  border-radius: 18px;
+  box-shadow: 0 4px 32px 0 rgba(0,0,0,0.08);
+  text-align: center;
+}
+.section-header {
+  margin-bottom: 2.2rem;
+  text-align: center;
+}
+.story-content {
+  text-align: center;
+  font-size: 1.18rem;
+  color: var(--color-text-primary);
+  line-height: 1.8;
+}
+.story-content p {
+  margin-bottom: 1.5rem;
+}
+.story-content .highlight-text {
+  color: #0078d4;
+  font-weight: 600;
+  background: linear-gradient(90deg,rgba(0,120,212,0.08),rgba(0,120,212,0.02));
+  border-left: 4px solid #0078d4;
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  margin: 2rem 0;
+  display: inline-block;
+  text-align: left;
+  max-width: 90%;
+}
 /* --- Hero Background Image --- */
 .hero-bg-image {
     position: absolute;
@@ -7,13 +42,34 @@
     height: 100%;
     background-image: url('images/hero.jpg');
     background-size: cover;
-    background-position: center;
+    background-position: top center; /* Crop from top, keep subject lower */
     background-repeat: no-repeat;
+    image-rendering: auto;
     opacity: 0.38;
-    filter: blur(1.5px) brightness(0.92);
+    filter: blur(1.1px) brightness(0.97); /* Slightly less blur, more clarity */
     z-index: var(--z-hero-bg);
     pointer-events: none;
     transition: opacity 0.7s var(--transition-smooth);
+    /* Retina/HiDPI sharpness */
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+@media (min-width: 1200px) {
+  .hero-bg-image {
+    background-size: cover;
+    background-position: top center;
+    min-height: 100vh;
+    max-height: 1200px;
+  }
+}
+@media (max-width: 768px) {
+  .hero-bg-image {
+    background-size: cover;
+    background-position: top center;
+    min-height: 60vh;
+    max-height: 600px;
+    filter: blur(1.3px) brightness(0.98);
+  }
 }
 /**
  * ===================================================================
@@ -27,6 +83,7 @@
  *
  * ===================================================================
  */
+
 
 /* --- 1. CSS Variables (Root) --- */
 :root {
@@ -314,12 +371,16 @@ a {
 .cta-section p { max-width: 60ch; margin: 0 auto 3rem auto; }
 
 /* --- 9. Footer --- */
-.main-footer { padding: 8rem 0 4rem 0; border-top: 1px solid var(--color-border); }
+.main-footer {
+    padding: 3.5rem 0 1.5rem 0;
+    border-top: 1px solid var(--color-border);
+    margin-top: 4rem;
+}
 .footer-grid {
     display: grid;
     grid-template-columns: 2fr 1fr 1fr;
-    gap: 4rem;
-    margin-bottom: 6rem;
+    gap: 2.2rem;
+    margin-bottom: 1.5rem;
 }
 .footer-column h4 { margin-bottom: 1.5rem; }
 .site-logo-image-footer { max-width: 180px; }
@@ -328,7 +389,15 @@ a {
 .footer-column ul a { color: var(--color-text-secondary); }
 .footer-column ul a:hover { color: var(--color-white); }
 .footer-column address { font-style: normal; line-height: 1.8; }
-.footer-bottom { text-align: center; padding-top: 3rem; border-top: 1px solid var(--color-border); }
+.footer-bottom {
+    text-align: center;
+    padding-top: 0.8rem;
+    border-top: 1px solid var(--color-border);
+    font-size: 0.98rem;
+    color: var(--color-text-secondary);
+    letter-spacing: 0.01em;
+    margin-top: 0.5rem;
+}
 
 /* --- 10. Animation Primitives (Unified) --- */
 .anim-fade-in-up {
@@ -780,6 +849,23 @@ a:focus, a:focus-visible, button:focus, button:focus-visible, input:focus, input
 .project-content p {
     color: var(--color-text-secondary);
     margin-bottom: 1.5rem;
+    word-break: keep-all;
+    white-space: normal;
+    hyphens: none;
+    overflow-wrap: normal;
+    line-break: strict;
+    text-wrap: balance;
+    letter-spacing: -0.01em;
+}
+.hero-headline-deconstruct {
+    word-break: keep-all !important;
+    white-space: normal !important;
+    hyphens: none !important;
+    overflow-wrap: normal !important;
+    line-break: strict !important;
+    text-wrap: balance !important;
+    letter-spacing: -0.01em !important;
+}
 }
 
 .project-content p strong {
