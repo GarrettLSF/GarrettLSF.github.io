@@ -6,68 +6,77 @@
     <title>Our Services | Elite Install & Haul</title>
     <meta name="description" content="Turnkey installation solutions for all educational environments, from K-12 classrooms and libraries to science labs and administrative areas.">
     
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <!-- Links to your master stylesheet -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <a href="#main-content" class="skip-link">Skip to main content</a>
 
-    <header class="main-header">
-        <nav class="nav-container container">
-            <a href="index.html" class="logo">Elite Install</a>
-            <ul class="nav-links" id="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="services.html" aria-current="page">Services</a></li>
-                <li><a href="projects.html">Projects</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-            <button class="mobile-menu-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-links">
-                <svg class="icon-open" width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 12H21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M3 6H21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M3 18H21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-                <svg class="icon-close" width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-            </button>
-        </nav>
+    <header class="main-header" role="banner">
+        <div class="header-main-nav">
+            <div class="container nav-container">
+                <a href="index.html" class="logo" aria-label="Elite Install & Haul - Home">
+                    <img src="images/logo.svg" alt="Elite Install & Haul Logo" class="site-logo-image" width="180" height="38">
+                </a>
+                <nav class="primary-navigation" aria-label="Main Navigation">
+                    <button class="mobile-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-links" aria-haspopup="true">
+                        <svg class="icon-open" width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <path d="M3 12H21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            <path d="M3 6H21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            <path d="M3 18H21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                        <svg class="icon-close" width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <path d="M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            <path d="M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </button>
+                    <ul class="nav-links" id="nav-links" role="menubar">
+                        <li role="none"><a href="index.html" role="menuitem">Home</a></li>
+                        <li role="none"><a href="about.html" role="menuitem">About</a></li>
+                        <li role="none"><a href="services.html" role="menuitem" aria-current="page">Services</a></li>
+                        <li role="none"><a href="projects.html" role="menuitem">Projects</a></li>
+                        <li role="none"><a href="contact.html" role="menuitem">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
     </header>
 
     <main id="main-content">
-        <!-- Page Header -->
-        <div class="page-header">
+        <div class="page-header anim-fade-in-up">
             <div class="container">
                 <h1>Our Installation Services</h1>
                 <p>We provide comprehensive, turnkey solutions for all educational and commercial environments, handling every detail so you can focus on your clients.</p>
             </div>
         </div>
 
-        <!-- Services Grid Section -->
         <section class="section">
             <div class="container">
                 <div class="services-grid">
-                    <div class="service-card">
+                    <div class="service-card anim-fade-in-up">
                         <h3>K-12 Classroom Furniture</h3>
                         <p>Desks, chairs, tables, teacher stations, and mobile storage. We handle everything from single classroom refreshes to entire new-build installations with precision and care.</p>
                     </div>
-                    <div class="service-card">
+                    <div class="service-card anim-fade-in-up" data-delay="100">
                         <h3>Library & Media Centers</h3>
                         <p>Expert assembly and placement of shelving systems, circulation desks, study carrels, soft seating, and collaborative furniture to create inspiring learning hubs.</p>
                     </div>
-                    <div class="service-card">
+                    <div class="service-card anim-fade-in-up" data-delay="200">
                         <h3>Science Labs & STEM</h3>
                         <p>Precision installation for lab stations, chemical-resistant countertops, fume hoods, and specialized STEM equipment that demands accuracy and safety protocols.</p>
                     </div>
-                    <div class="service-card">
+                    <div class="service-card anim-fade-in-up" data-delay="300">
                         <h3>Cafeterias & Common Areas</h3>
                         <p>High-volume installation of cafeteria tables, benches, waste receptacles, stage equipment, and common area lounge furniture, completed efficiently and professionally.</p>
                     </div>
-                    <div class="service-card">
+                    <div class="service-card anim-fade-in-up" data-delay="400">
                         <h3>Administrative & Office Areas</h3>
                         <p>Assembly of office systems, reception desks, conference tables, and storage solutions that create professional environments reflecting your dealership's quality.</p>
                     </div>
-                    <div class="service-card">
+                    <div class="service-card anim-fade-in-up" data-delay="500">
                         <h3>Full Project Support</h3>
                         <p>Beyond installation, we offer project phasing coordination, receiving and warehousing, debris removal, site cleanup, and final warranty walkthrough support.</p>
                     </div>
@@ -75,8 +84,7 @@
             </div>
         </section>
 
-        <!-- Final Call to Action -->
-        <section class="cta-section">
+        <section class="cta-section anim-fade-in-up">
             <div class="container">
                 <h2>Ready to build with a reliable partner?</h2>
                 <p>Let's discuss how we can support your next project with the reliability your dealership deserves.</p>
@@ -86,23 +94,42 @@
 
     </main>
 
-    <footer class="main-footer">
+    <footer class="main-footer" role="contentinfo">
         <div class="container">
-            <div class="footer-content">
-                <p class="footer-logo">Elite Install</p>
-                <ul class="footer-nav">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="services.html">Services</a></li>
-                    <li><a href="projects.html">Projects</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
-                <p class="footer-copyright">&copy; 2025 Elite Install & Haul. All rights reserved.</p>
+            <div class="footer-grid">
+                <div class="footer-column about">
+                    <a href="index.html" class="footer-logo" aria-label="Elite Install & Haul - Home">
+                        <img src="images/logo.svg" alt="Elite Install & Haul Logo" class="site-logo-image-footer" width="180" height="38">
+                    </a>
+                    <p>The B2B installation partner delivering professional execution, proactive communication, and unwavering reliability for school furniture dealers in Texas.</p>
+                </div>
+                <nav class="footer-column links" aria-labelledby="footer-nav-heading">
+                    <h4 id="footer-nav-heading">Navigate</h4>
+                    <ul role="list">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="services.html">Our Services</a></li>
+                        <li><a href="projects.html">View Our Work</a></li>
+                        <li><a href="contact.html">Become a Partner</a></li>
+                    </ul>
+                </nav>
+                <div class="footer-column contact" aria-labelledby="footer-contact-heading">
+                    <h4 id="footer-contact-heading">Get In Touch</h4>
+                    <address>
+                        <a href="tel:+14693801551" aria-label="Call us at 469-380-1551">(469) 380-1551</a><br>
+                        <a href="mailto:tylerherrick13@gmail.com" aria-label="Email us at tylerherrick13@gmail.com">tylerherrick13@gmail.com</a><br>
+                        <span>Serving Dallas, Houston, Austin, & San Antonio.</span>
+                    </address>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Elite Install & Haul. Your Reputation, Installed.</p>
             </div>
         </div>
     </footer>
 
-    <!-- Links to your master JavaScript file -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
     <script src="script.js" defer></script>
 </body>
 </html>
