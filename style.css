@@ -1045,6 +1045,13 @@ a:focus, a:focus-visible, button:focus, button:focus-visible, input:focus, input
 
 /* --- 14. Contact Page Styles --- */
 
+.contact-page-header {
+    background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('images/contact-hero.jpg');
+    background-size: cover;
+    background-position: center;
+    padding: 8rem 0;
+}
+
 .contact-grid {
     display: grid;
     grid-template-columns: 1.5fr 1fr; /* Make the form column slightly wider */
@@ -1086,11 +1093,19 @@ a:focus, a:focus-visible, button:focus, button:focus-visible, input:focus, input
 }
 
 .contact-info-item {
+    display: flex;
+    align-items: flex-start;
     margin-bottom: 2.5rem;
 }
 
 .contact-info-item:last-child {
     margin-bottom: 0;
+}
+
+.contact-info-item .icon {
+    margin-right: 1.5rem;
+    color: var(--color-primary);
+    font-size: 1.5rem;
 }
 
 .contact-info-item h4 {
