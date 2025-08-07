@@ -62,96 +62,48 @@
       "openingHours": "Mo,Tu,We,Th,Fr 08:00-18:00"
     }
     </script>
-
-    <style>
-        /* Critical CSS for immediate visibility */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background-color: #0D0D0D;
-            color: #F5F5F5;
-            line-height: 1.7;
-        }
-        
-        .container {
-            max-width: 1240px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-        
-        /* Ensure text is always visible */
-        h1, h2, h3, h4 {
-            color: #FFFFFF !important;
-            font-weight: 700;
-            line-height: 1.2;
-            z-index: 10;
-            position: relative;
-        }
-        
-        p {
-            color: #999999 !important;
-            z-index: 10;
-            position: relative;
-        }
-        
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            text-align: center;
-            position: relative;
-            padding: 6rem 0;
-        }
-        
-        .hero-content {
-            position: relative;
-            z-index: 100 !important;
-        }
-        
-        .hero h1 {
-            font-size: clamp(3rem, 6vw + 1rem, 5.5rem);
-            margin-bottom: 1.5rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
-        }
-        
-        .hero .subtitle {
-            font-size: 1.25rem;
-            max-width: 60ch;
-            margin: 0 auto 2.5rem auto;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
-        }
-        
-        #hero-canvas-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            z-index: 1;
-            background: radial-gradient(ellipse at 30% 50%, rgba(255,255,255,0.03) 0%, transparent 60%),
-                        linear-gradient(135deg, rgba(255,255,255,0.01) 0%, rgba(255,255,255,0.02) 100%);
-            opacity: 0.8;
-        }
-    </style>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <a href="#main-content" class="skip-link">Skip to main content</a>
     
-    <div id="header-placeholder"></div>
+    <header class="main-header" role="banner">
+        <div class="header-main-nav">
+            <div class="container nav-container">
+                <a href="index.html" class="logo" aria-label="Elite Install & Haul - Home">
+                    <img src="images/logo.svg" alt="Elite Install & Haul Logo" class="site-logo-image" width="180" height="38">
+                </a>
+                <nav class="primary-navigation" aria-label="Main Navigation">
+                    <button class="mobile-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-links" aria-haspopup="true">
+                        <svg class="icon-open" width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <path d="M3 12H21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            <path d="M3 6H21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            <path d="M3 18H21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                        <svg class="icon-close" width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <path d="M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            <path d="M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </button>
+                    <ul class="nav-links" id="nav-links" role="menubar">
+                        <li role="none"><a href="index.html" role="menuitem" aria-current="page">Home</a></li>
+                        <li role="none"><a href="about.html" role="menuitem">About</a></li>
+                        <li role="none"><a href="services.html" role="menuitem">Services</a></li>
+                        <li role="none"><a href="projects.html" role="menuitem">Projects</a></li>
+                        <li role="none"><a href="contact.html" role="menuitem">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
 
     <main id="main-content">
 
         <section class="hero">
             <div id="hero-canvas-container"></div>
             <div class="container hero-content">
-                <h1>Your Reputation, Installed.</h1>
-                <p class="subtitle">A new standard in B2B furniture installation has arrived. We are a partner built on a simple promise: to protect your reputation as if it were our own. By prioritizing professionalism and clear communication, we deliver results that build trust with you and your clients.</p>
+                <h1 class="anim-fade-in-up">Your Reputation, Installed.</h1>
+                <p class="subtitle anim-fade-in-up" data-delay="100">A new standard in B2B furniture installation has arrived. We are a partner built on a simple promise: to protect your reputation as if it were our own. By prioritizing professionalism and clear communication, we deliver results that build trust with you and your clients.</p>
                 <div class="cta-buttons anim-fade-in-up" data-delay="200">
                     <a href="services.html" class="btn btn-primary">Explore Our Services</a>
                     <a href="contact.html" class="btn btn-secondary">Request a Quote</a>
@@ -253,127 +205,42 @@
         </section>
     </main>
 
-    <div id="footer-placeholder"></div>
+    <footer class="main-footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column about">
+                    <a href="index.html" class="footer-logo" aria-label="Elite Install & Haul - Home">
+                        <img src="images/logo.svg" alt="Elite Install & Haul Logo" class="site-logo-image-footer" width="180" height="38">
+                    </a>
+                    <p>The B2B installation partner delivering professional execution, proactive communication, and unwavering reliability for school furniture dealers in Texas.</p>
+                </div>
+                <nav class="footer-column links" aria-labelledby="footer-nav-heading">
+                    <h4 id="footer-nav-heading">Navigate</h4>
+                    <ul role="list">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="services.html">Our Services</a></li>
+                        <li><a href="projects.html">View Our Work</a></li>
+                        <li><a href="contact.html">Become a Partner</a></li>
+                    </ul>
+                </nav>
+                <div class="footer-column contact" aria-labelledby="footer-contact-heading">
+                    <h4 id="footer-contact-heading">Get In Touch</h4>
+                    <address>
+                        <a href="tel:+14693801551" aria-label="Call us at 469-380-1551">(469) 380-1551</a><br>
+                        <a href="mailto:tylerherrick13@gmail.com" aria-label="Email us at tylerherrick13@gmail.com">tylerherrick13@gmail.com</a><br>
+                        <span>Serving Dallas, Houston, Austin, & San Antonio.</span>
+                    </address>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Elite Install & Haul. Your Reputation, Installed.</p>
+            </div>
+        </div>
+    </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     
-    <style>
-        /* Additional fixes to ensure visibility */
-        .btn {
-            display: inline-block;
-            padding: 0.9rem 2.25rem;
-            border-radius: 8px;
-            font-weight: 700;
-            text-align: center;
-            cursor: pointer;
-            border: 1px solid transparent;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            position: relative;
-            z-index: 10;
-        }
-        
-        .btn-primary {
-            background-color: #FFFFFF;
-            color: #0D0D0D;
-            border-color: #FFFFFF;
-        }
-        
-        .btn-secondary {
-            background-color: transparent;
-            border-color: rgba(255, 255, 255, 0.1);
-            color: #F5F5F5;
-        }
-        
-        .btn:hover {
-            transform: translateY(-3px);
-        }
-        
-        .cta-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-        
-        .section {
-            padding: 8rem 0;
-            position: relative;
-        }
-        
-        .section-accented {
-            background-color: #1A1A1A;
-        }
-        
-        .section-header {
-            text-align: center;
-            margin: 0 auto 5rem auto;
-            max-width: 800px;
-        }
-        
-        .section-header h2 {
-            margin-bottom: 1.5rem;
-            font-size: clamp(2.25rem, 5vw, 3.5rem);
-        }
-        
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-        }
-        
-        .feature-card {
-            background-color: rgba(0,0,0,0.2);
-            padding: 2.5rem;
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
-        }
-        
-        .feature-card:hover {
-            background-color: rgba(255,255,255,0.05);
-            transform: translateY(-5px);
-        }
-        
-        .feature-icon {
-            margin-bottom: 1.5rem;
-        }
-        
-        .feature-icon svg {
-            width: 40px;
-            height: 40px;
-            color: #FFFFFF;
-        }
-        
-        .feature-card h3 {
-            margin-bottom: 1rem;
-            font-size: 1.5rem;
-            color: #F5F5F5 !important;
-        }
-        
-        /* Animation classes */
-        .anim-fade-in-up {
-            opacity: 0;
-            transform: translateY(40px);
-        }
-        
-        /* Mobile responsive */
-        @media (max-width: 768px) {
-            .cta-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .cta-buttons .btn {
-                width: 100%;
-                max-width: 350px;
-            }
-            
-            .container {
-                padding: 0 1.5rem;
-            }
-        }
-    </style>
+    <script src="script.js" defer></script>
 </body>
 </html>
