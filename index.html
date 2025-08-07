@@ -151,67 +151,65 @@
 
     <main id="main-content">
 
-        <!-- Sticky CTA Button for Mobile -->
-        <a href="contact.html" class="sticky-cta" style="position:fixed;bottom:24px;right:24px;z-index:1000;display:none;padding:1em 2em;background:#0078d4;color:#fff;border-radius:32px;font-weight:bold;box-shadow:0 2px 8px rgba(0,0,0,0.15);text-decoration:none;transition:background 0.2s;">Request a Quote</a>
-        <script>
-        // Show sticky CTA on mobile only
-        function toggleStickyCTA() {
-          var cta = document.querySelector('.sticky-cta');
-          if(window.innerWidth < 800) { cta.style.display = 'block'; } else { cta.style.display = 'none'; }
-        }
-        window.addEventListener('resize', toggleStickyCTA);
-        window.addEventListener('DOMContentLoaded', toggleStickyCTA);
-        </script>
+    <!-- Sticky CTA Button for Mobile -->
+    <a href="contact.html" class="sticky-cta" style="position:fixed;bottom:2.5rem;right:2.5rem;z-index:1000;display:none;padding:1.1em 2.2em;background:#0078d4;color:#fff;border-radius:32px;font-weight:700;box-shadow:0 2px 16px rgba(0,0,0,0.18);text-decoration:none;letter-spacing:0.02em;transition:background 0.2s,box-shadow 0.2s;">Request a Quote</a>
+    <script>
+      function toggleStickyCTA() {
+        var cta = document.querySelector('.sticky-cta');
+        if(window.innerWidth < 800) { cta.style.display = 'block'; } else { cta.style.display = 'none'; }
+      }
+      window.addEventListener('resize', toggleStickyCTA);
+      window.addEventListener('DOMContentLoaded', toggleStickyCTA);
+    </script>
 
         <section class="hero">
     <div id="hero-canvas-container"></div>
-    <div class="container hero-content">
-        <h1 class="hero-headline-deconstruct">Your Reputation, Installed.</h1>
-        <!-- NEW SUB-HEADLINE -->
-        <p class="subtitle anim-fade-in-up" data-delay="100">Your trusted partner for school furniture installation in Texas. We provide certified, insured, and professional installation services that protect your brand and ensure project success for your clients.</p>
-        <!-- NEW, SINGLE CTA BUTTON -->
-        <div class="cta-buttons anim-fade-in-up" data-delay="200">
-            <a href="contact.html" class="btn btn-primary">Request a Free Quote</a>
+    <div class="hero-bg-image" aria-hidden="true"></div>
+    <div class="container hero-content" style="padding-top:6rem;padding-bottom:6rem;max-width:700px;position:relative;">
+        <h1 class="hero-headline-deconstruct" style="margin-bottom:1.2rem;">Your Reputation, Installed.</h1>
+        <p class="subtitle anim-fade-in-up" data-delay="100" style="margin-bottom:2.2rem;">Your trusted partner for school furniture installation in Texas. We provide certified, insured, and professional installation services that protect your brand and ensure project success for your clients.</p>
+        <div class="cta-buttons anim-fade-in-up" data-delay="200" style="gap:1.2rem;">
+            <a href="contact.html" class="btn btn-primary" style="min-width:220px;">Request a Free Quote</a>
         </div>
     </div>
 </section>
 
         <section class="section section-accented principles-section">
-            <div class="container">
-                <div class="section-header anim-fade-in-up">
-                    <h2>Our Foundational Commitments</h2>
-                    <p>These are the principles that define our work. They are not aspirational goals, but the standards we bring to every project, ensuring a professional experience from our first conversation to the final walkthrough.</p>
+            <div class="container" style="max-width:1200px;">
+                <div class="section-header anim-fade-in-up" style="margin-bottom:3.5rem;">
+                    <h2 style="margin-bottom:1.2rem;">Our Foundational Commitments</h2>
+                    <p style="margin-bottom:0;">These are the principles that define our work. They are not aspirational goals, but the standards we bring to every project, ensuring a professional experience from our first conversation to the final walkthrough.</p>
                 </div>
-                <div class="features-grid">
-                    <article class="feature-card anim-fade-in-up">
-                        <div class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></div>
-                        <h3>Unwavering Reliability</h3>
-                        <p>Your schedule is our guide. We approach every project with thorough planning and logistical foresight to ensure your timeline is respected and your peace of mind is protected.</p>
+                <div class="features-grid" style="gap:2.5rem;">
+                    <article class="feature-card anim-fade-in-up" style="padding:2.5rem 2rem;">
+                        <div class="feature-icon" style="margin-bottom:1.2rem;"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></div>
+                        <h3 style="margin-bottom:0.7rem;">Unwavering Reliability</h3>
+                        <p style="margin-bottom:0;">Your schedule is our guide. We approach every project with thorough planning and logistical foresight to ensure your timeline is respected and your peace of mind is protected.</p>
                     </article>
-                    <article class="feature-card anim-fade-in-up" data-delay="100">
-                        <div class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><polyline points="17 11 19 13 23 9"></polyline></svg></div>
-                        <h3>Radical Professionalism</h3>
-                        <p>Our uniformed crew understands they are ambassadors for your brand. We operate with courtesy and respect, maintaining a clean and orderly site to reflect the quality you promise.</p>
+                    <article class="feature-card anim-fade-in-up" data-delay="100" style="padding:2.5rem 2rem;">
+                        <div class="feature-icon" style="margin-bottom:1.2rem;"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><polyline points="17 11 19 13 23 9"></polyline></svg></div>
+                        <h3 style="margin-bottom:0.7rem;">Radical Professionalism</h3>
+                        <p style="margin-bottom:0;">Our uniformed crew understands they are ambassadors for your brand. We operate with courtesy and respect, maintaining a clean and orderly site to reflect the quality you promise.</p>
                     </article>
-                    <article class="feature-card anim-fade-in-up" data-delay="200">
-                        <div class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-4.44A2.78 2.78 0 0 0 5 4.78v14.44A2.78 2.78 0 0 0 7.78 22h8.44A2.78 2.78 0 0 0 19 19.22V10z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="12" y1="18" x2="12" y2="12"></line><line x1="9" y1="15" x2="15" y2="15"></line></svg></div>
-                        <h3>Dedicated Expertise</h3>
-                        <p>We get it right the first time. We do not use temporary labor. Our full-time, dedicated team has the training and tools necessary to execute installations efficiently, minimizing punch lists and return trips.</p>
+                    <article class="feature-card anim-fade-in-up" data-delay="200" style="padding:2.5rem 2rem;">
+                        <div class="feature-icon" style="margin-bottom:1.2rem;"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-4.44A2.78 2.78 0 0 0 5 4.78v14.44A2.78 2.78 0 0 0 7.78 22h8.44A2.78 2.78 0 0 0 19 19.22V10z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="12" y1="18" x2="12" y2="12"></line><line x1="9" y1="15" x2="15" y2="15"></line></svg></div>
+                        <h3 style="margin-bottom:0.7rem;">Dedicated Expertise</h3>
+                        <p style="margin-bottom:0;">We get it right the first time. We do not use temporary labor. Our full-time, dedicated team has the training and tools necessary to execute installations efficiently, minimizing punch lists and return trips.</p>
                     </article>
-                    <article class="feature-card anim-fade-in-up" data-delay="300">
-                        <div class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg></div>
-                        <h3>Proactive Communication</h3>
-                        <p>You will always be informed. We establish a clear rhythm of communication and provide a single point of contact, so you never have to guess the status of your project.</p>
+                    <article class="feature-card anim-fade-in-up" data-delay="300" style="padding:2.5rem 2rem;">
+                        <div class="feature-icon" style="margin-bottom:1.2rem;"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg></div>
+                        <h3 style="margin-bottom:0.7rem;">Proactive Communication</h3>
+                        <p style="margin-bottom:0;">You will always be informed. We establish a clear rhythm of communication and provide a single point of contact, so you never have to guess the status of your project.</p>
                     </article>
                 </div>
             </div>
         </section>
 
         <section class="cta-section anim-fade-in-up">
-            <div class="container">
-                <h2>Let's Build a Partnership.</h2>
-                <p>Ready to work with an installation partner that values your reputation as much as you do? Contact us today to discuss your next project.</p>
-                <a href="contact.html" class="btn btn-primary">Begin the Conversation</a>
+            <div class="container" style="max-width:700px;">
+                <h2 style="margin-bottom:1.2rem;">Let's Build a Partnership.</h2>
+                <p style="margin-bottom:2.2rem;">Ready to work with an installation partner that values your reputation as much as you do? Contact us today to discuss your next project.</p>
+                <a href="contact.html" class="btn btn-primary" style="min-width:220px;">Begin the Conversation</a>
             </div>
         </section>
     </main>
