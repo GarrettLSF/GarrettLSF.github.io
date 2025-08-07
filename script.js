@@ -6,6 +6,7 @@
  *
  * This script implements the "Refined Dynamism" philosophy using GSAP
  * for high-performance, orchestrated animations and interactive elements.
+ * It is designed to be cutting-edge, modular, and efficient.
  *
  * TABLE OF CONTENTS
  * 1. App Initialization
@@ -22,20 +23,29 @@
     'use strict';
 
     // --- 1. App Initialization ---
-    document.addEventListener('DOMContentLoaded', () => {
-        // Ensure GSAP and ScrollTrigger are available before using them
-        if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
-            console.error('GSAP or ScrollTrigger is not loaded.');
-            return;
-        }
-        gsap.registerPlugin(ScrollTrigger);
+    const App = {
+        init() {
+            // Wait for the DOM to be fully loaded before initializing modules
+            document.addEventListener('DOMContentLoaded', () => {
+                // Ensure GSAP and ScrollTrigger are available before using them
+                if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
+                    console.error('GSAP or ScrollTrigger is not loaded. Animations will be disabled.');
+                    return;
+                }
+                gsap.registerPlugin(ScrollTrigger);
 
-        mobileNav.init();
-        stickyHeader.init();
-        scrollAnimator.init();
-        horizontalProcessScroll.init();
-        hero3DBackground.init(); // Initialize the 3D background
-    });
+                this.initComponents();
+            });
+        },
+
+        initComponents() {
+            mobileNav.init();
+            stickyHeader.init();
+            scrollAnimator.init();
+            horizontalProcessScroll.init();
+            hero3DBackground.init(); // Initialize the 3D background
+        }
+    };
 
 
     // --- 2. Module: Mobile Navigation ---
@@ -50,11 +60,39 @@
             this.lastFocusable = this.focusableElements[this.focusableElements.length - 1];
 
             this.toggleButton.addEventListener('click', this.toggleMenu.bind(this));
+            document.addEventListener('keydown', this.handleKeydown.bind(this));
         },
         toggleMenu() {
             const body = document.body;
             const isExpanded = body.classList.toggle('mobile-nav-open');
             this.toggleButton.setAttribute('aria-expanded', String(isExpanded));
+
+            if (isExpanded) {
+                this.firstFocusable.focus();
+            }
+        },
+        handleKeydown(event) {
+            const isNavOpen = document.body.classList.contains('mobile-nav-open');
+            if (!isNavOpen) return;
+
+            if (event.key === 'Escape') {
+                this.toggleMenu();
+            }
+
+            // Focus trap logic
+            if (event.key === 'Tab') {
+                if (event.shiftKey) { // Shift + Tab
+                    if (document.activeElement === this.firstFocusable) {
+                        this.lastFocusable.focus();
+                        event.preventDefault();
+                    }
+                } else { // Tab
+                    if (document.activeElement === this.lastFocusable) {
+                        this.firstFocusable.focus();
+                        event.preventDefault();
+                    }
+                }
+            }
         }
     };
 
@@ -62,18 +100,17 @@
     // --- 3. Module: Sticky Header ---
     const stickyHeader = {
         init() {
-            this.header = document.querySelector('.main-header');
-            if (!this.header) return;
+            const header = document.querySelector('.main-header');
+            if (!header) return;
             
             ScrollTrigger.create({
                 start: 'top top-=10',
-                onUpdate: self => {
-                    self.direction === -1 ? this.header.classList.remove('is-scrolled') : this.header.classList.add('is-scrolled');
-                },
                 toggleClass: {
                     className: 'is-scrolled',
-                    target: this.header
-                }
+                    target: header
+                },
+                // Add a marker for debugging if needed
+                // markers: true 
             });
         }
     };
@@ -115,23 +152,25 @@
             const scrollWrapper = document.querySelector('.process-steps-wrapper');
             if (!container || !scrollWrapper) return;
 
-            // Calculate the total width to scroll
-            // scrollWidth is the total width of the content, offsetWidth is the visible width of the container
-            const scrollDistance = scrollWrapper.scrollWidth - container.offsetWidth;
+            // Use a timeout to ensure all assets are loaded and dimensions are correct
+            setTimeout(() => {
+                const scrollDistance = scrollWrapper.scrollWidth - container.offsetWidth;
+                if (scrollDistance <= 0) return;
 
-            gsap.to(scrollWrapper, {
-                x: -scrollDistance,
-                ease: 'none', // Linear scroll
-                scrollTrigger: {
-                    trigger: container,
-                    start: 'center center',
-                    end: () => `+=${scrollDistance}`,
-                    scrub: 1,
-                    pin: true,
-                    anticipatePin: 1,
-                    invalidateOnRefresh: true,
-                }
-            });
+                gsap.to(scrollWrapper, {
+                    x: -scrollDistance,
+                    ease: 'none', // Linear scroll for a smooth, controlled motion
+                    scrollTrigger: {
+                        trigger: container,
+                        start: 'center center',
+                        end: () => `+=${scrollDistance}`,
+                        scrub: 1,
+                        pin: true,
+                        anticipatePin: 1,
+                        invalidateOnRefresh: true,
+                    }
+                });
+            }, 100);
         }
     };
     
@@ -157,24 +196,31 @@
             1. const scene = new THREE.Scene();
             2. const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
             3. const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-            4. renderer.setSize(window.innerWidth, window.innerHeight);
-            5. container.appendChild(renderer.domElement);
+            4. renderer.setPixelRatio(window.devicePixelRatio);
+            5. renderer.setSize(window.innerWidth, window.innerHeight);
+            6. container.appendChild(renderer.domElement);
             
-            6. // Create particles or other 3D objects
+            7. // Create particles or other 3D objects
                const particles = createParticleSystem();
                scene.add(particles);
             
-            7. // Animation loop
-               function animate() {
-                   requestAnimationFrame(animate);
+            8. // Animation loop controlled by GSAP for better performance management
+               gsap.ticker.add(() => {
                    // update particle positions, etc.
                    renderer.render(scene, camera);
-               }
-               animate();
+               });
                
-            8. // Handle window resize
+            9. // Handle window resize to keep the scene responsive
+               window.addEventListener('resize', () => {
+                   camera.aspect = window.innerWidth / window.innerHeight;
+                   camera.updateProjectionMatrix();
+                   renderer.setSize(window.innerWidth, window.innerHeight);
+               });
             */
         }
     };
+
+    // Kick off the application
+    App.init();
 
 })();
