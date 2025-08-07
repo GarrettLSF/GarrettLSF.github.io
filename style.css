@@ -309,11 +309,17 @@ a {
     font-weight: 600;
     letter-spacing: -0.02em;
     margin-bottom: 2rem;
+    color: var(--color-white);
 }
 
 .hero-headline-deconstruct span {
     white-space: nowrap;
-    display: block;
+    display: inline-block;
+}
+
+.hero-headline-deconstruct .accent-text {
+    color: #0078d4;
+    text-shadow: 0 0 20px rgba(0, 120, 212, 0.3);
 }
 #hero-canvas-container {
     position: absolute;
@@ -338,22 +344,29 @@ a {
 .hero .subtitle {
     font-size: 1.25rem;
     max-width: 40ch;
-    margin: 0 0 2.5rem 0; /* Changed from auto to 0 for left alignment */
+    margin: 0 0 2.5rem 0;
     text-align: left;
+    color: rgba(255, 255, 255, 0.95); /* Increased from 0.95 for better readability */
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    line-height: 1.6;
 }
 
 /* --- 7. Buttons --- */
 .btn {
     display: inline-flex;
-    padding: 1rem 2.5rem;
+    padding: 0.9rem 2rem;
     border-radius: 8px;
-    font-weight: 700;
+    font-weight: 600;
+    font-size: 1rem;
     cursor: pointer;
     border: 1px solid transparent;
     transition: all var(--transition-bounce);
     box-shadow: 0 2px 8px 0 rgba(0,0,0,0.10);
     will-change: transform, box-shadow;
     outline: none;
+    min-width: 160px;
+    justify-content: center;
+    letter-spacing: 0.01em;
 }
 .btn:hover, .btn:focus-visible {
     transform: translateY(-4px) scale(1.04);
