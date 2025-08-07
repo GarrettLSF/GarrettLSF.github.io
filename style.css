@@ -314,7 +314,9 @@ a {
 
 .hero-headline-deconstruct span {
     white-space: nowrap;
-    display: inline-block;
+    display: inline-block; /* This was changed from block */
+    opacity: 0; /* Set initial opacity for animation */
+    visibility: hidden; /* Hide until animation starts */
 }
 
 .hero-headline-deconstruct .accent-text {

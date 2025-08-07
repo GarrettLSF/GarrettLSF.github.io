@@ -201,41 +201,25 @@ const signatureInteraction = {
             if (this.headline) this.headline.style.opacity = 1;
             return;
         }
-        this.splitText();
+        // We no longer need to split the text, as the spans are in the HTML.
         this.createAnimation();
     },
-    splitText() {
-        const text = this.headline.textContent;
-        this.headline.innerHTML = '';
-        text.split('').forEach(char => {
-            const span = document.createElement('span');
-            span.innerHTML = char === ' ' ? '&nbsp;' : char;
-            span.style.display = 'inline-block';
-            this.headline.appendChild(span);
-        });
-    },
     createAnimation() {
-        const letters = Array.from(this.headline.querySelectorAll('span'));
-        gsap.set(this.headline, { perspective: 800 });
-        gsap.set(letters, { transformOrigin: '50% 50%', willChange: 'transform, opacity' });
-        const timeline = gsap.timeline({
-            scrollTrigger: {
-                trigger: '.hero',
-                start: 'top top',
-                end: '+=1000',
-                scrub: 1,
-            }
+        const words = Array.from(this.headline.querySelectorAll('span'));
+        // Set initial state for a fade-in animation
+        gsap.set(words, { 
+            autoAlpha: 0, 
+            y: 30 
         });
-        timeline.to(letters, {
-            duration: 1,
-            x: () => gsap.utils.random(-250, 250),
-            y: () => gsap.utils.random(-150, 150),
-            z: () => gsap.utils.random(-300, 300),
-            rotationX: () => gsap.utils.random(-90, 90),
-            rotationY: () => gsap.utils.random(-90, 90),
-            opacity: 0,
-            stagger: { each: 0.02, from: 'random' },
-            ease: 'power2.out'
+
+        // Create a timeline to animate the words in
+        gsap.to(words, {
+            duration: 0.8,
+            autoAlpha: 1,
+            y: 0,
+            stagger: 0.1,
+            ease: 'power2.out',
+            delay: 0.2
         });
     }
 };
