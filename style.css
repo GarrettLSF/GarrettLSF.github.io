@@ -398,3 +398,172 @@ a {
     .project-gallery-grid { grid-template-columns: 1fr; }
     .project-overview-grid { grid-template-columns: 1fr; }
 }
+
+/* --- 14. Contact Page Styles --- */
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr; /* Make the form column slightly wider */
+    gap: 4rem;
+    align-items: start;
+}
+
+.form-group {
+    margin-bottom: 2rem;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+    color: var(--color-text-primary);
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group textarea {
+    width: 100%;
+    padding: 1rem;
+    background-color: var(--color-gray-dark);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    color: var(--color-white);
+    font-family: var(--font-primary);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.form-group input[type="text"]:focus,
+.form-group input[type="email"]:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--color-white);
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
+}
+
+.contact-info-item {
+    margin-bottom: 2.5rem;
+}
+
+.contact-info-item:last-child {
+    margin-bottom: 0;
+}
+
+.contact-info-item h4 {
+    color: var(--color-white);
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.contact-info-item p {
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Responsive adjustments for the contact page */
+@media (max-width: 992px) {
+    .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+}
+
+/* --- 15. Services Page Styles --- */
+
+.services-grid {
+    display: grid;
+    /* Creates 3 columns on desktop, 2 on tablet, and 1 on mobile */
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+}
+
+.service-card {
+    background-color: var(--color-gray-dark);
+    padding: 2.5rem;
+    border-radius: 12px;
+    border: 1px solid var(--color-border);
+    transition: all 0.4s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--color-border-hover);
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.service-card h3 {
+    margin-bottom: 1rem;
+    color: var(--color-white);
+    font-size: 1.5rem;
+}
+
+.service-card p {
+    color: var(--color-text-secondary);
+    margin: 0;
+    line-height: 1.7;
+}
+
+/* --- 16. Projects Page Styles --- */
+
+.projects-grid {
+    display: grid;
+    /* Creates 2 columns on desktop and 1 on mobile */
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 2rem;
+}
+
+.project-card {
+    background-color: var(--color-gray-dark);
+    border-radius: 12px;
+    border: 1px solid var(--color-border);
+    overflow: hidden; /* Ensures the image placeholder doesn't bleed out */
+    transition: all 0.4s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--color-border-hover);
+}
+
+.project-image {
+    background-color: #333; /* A placeholder color */
+    color: var(--color-text-secondary);
+    font-size: 1.5rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 250px; /* Gives the placeholder a consistent size */
+    border-bottom: 1px solid var(--color-border);
+}
+
+.project-content {
+    padding: 2.5rem;
+}
+
+.project-content h3 {
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+    color: var(--color-white);
+}
+
+.project-content p {
+    color: var(--color-text-secondary);
+    margin-bottom: 1.5rem;
+}
+
+.project-content p strong {
+    color: var(--color-text-primary);
+    font-weight: 500;
+}
+
+.project-highlight {
+    background-color: rgba(0,0,0,0.2);
+    padding: 1rem 1.5rem;
+    border-left: 3px solid var(--color-border-hover);
+    border-radius: 4px;
+    font-style: italic;
+    color: var(--color-text-secondary);
+}
