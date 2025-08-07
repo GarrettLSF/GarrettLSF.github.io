@@ -1,3 +1,28 @@
+/* Ensure CTA text is always centered */
+.cta-text {
+    text-align: center !important;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+/* Section background alternation for index.html */
+.expertise-section {
+    background: #232a33;
+}
+.trust-signals-section {
+    background: #262b33;
+}
+.principles-section {
+    background: #232323;
+}
+.faq-section {
+    background: #101113;
+}
+.section-divider {
+    line-height: 0;
+    margin: 0;
+    padding: 0;
+}
 /* FAQ Accordion Styles */
 .faq-accordion-container {
     background: #101113;
