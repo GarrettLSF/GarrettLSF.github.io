@@ -1,3 +1,10 @@
+/* Ensure about page intro and highlight texts are always centered */
+.centered-story-intro, .highlight-text {
+    text-align: center !important;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
 /* Ensure CTA text is always centered */
 .cta-text {
     text-align: center !important;
