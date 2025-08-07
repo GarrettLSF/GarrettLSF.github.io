@@ -20,38 +20,25 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Step 4: Page Polish Elements -->
-    <div class="page-transition-overlay"></div>
-    <div class="custom-cursor"></div>
-
     <a href="#main-content" class="skip-link">Skip to main content</a>
     
-    <!-- Step 3: Innovative Navigation Header -->
-    <header class="main-header" role="banner">
-        <div class="header-main-nav">
-            <div class="container nav-container">
-                <a href="index.html" class="logo" aria-label="Elite Install & Haul - Home">
-                    <img src="images/logo.svg" alt="Elite Install & Haul Logo" class="site-logo-image" width="180" height="38">
-                </a>
-                <button class="menu-toggle-btn" aria-label="Open Navigation Menu" aria-expanded="false">
-                    <span class="line line-1"></span>
-                    <span class="line line-2"></span>
-                    <span class="line line-3"></span>
-                </button>
-            </div>
-        </div>
-        <div class="nav-overlay">
-            <div class="nav-overlay-background" style="background-image: url(images/project-library-placeholder.jpg);"></div>
-            <nav class="nav-overlay-menu">
-                <ul>
-                    <li><a href="index.html" class="nav-link-magnetic"><span>Home</span></a></li>
-                    <li><a href="about.html" class="nav-link-magnetic"><span>About</span></a></li>
-                    <li><a href="services.html" class="nav-link-magnetic"><span>Services</span></a></li>
-                    <li><a href="projects.html" class="nav-link-magnetic"><span>Projects</span></a></li>
-                    <li><a href="contact.html" class="nav-link-magnetic"><span>Contact</span></a></li>
-                </ul>
-            </nav>
-        </div>
+    <header class="main-header">
+        <nav class="nav-container container">
+            <a href="index.html" class="logo">
+                <img src="images/logo.svg" alt="Elite Install Logo" class="site-logo-image" width="180" height="38">
+            </a>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="index.html" aria-current="page">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <button class="mobile-menu-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-links">
+                <svg class="icon-open" width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 12H21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M3 6H21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M3 18H21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                <svg class="icon-close" width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            </button>
+        </nav>
     </header>
 
     <main id="main-content">
@@ -59,7 +46,6 @@
         <section class="hero">
             <div id="hero-canvas-container"></div>
             <div class="container hero-content">
-                <!-- Step 1: Signature Interaction Target -->
                 <h1 class="hero-headline-deconstruct">Your Reputation, Installed.</h1>
                 <p class="subtitle anim-fade-in-up" data-delay="100">A new standard in B2B furniture installation has arrived. We are a partner built on a simple promise: to protect your reputation as if it were our own. By prioritizing professionalism and clear communication, we deliver results that build trust with you and your clients.</p>
                 <div class="cta-buttons anim-fade-in-up" data-delay="200">
@@ -142,7 +128,6 @@
         </div>
     </footer>
 
-    <!-- Step 5: Optimized Script Loading -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
     <script src="script.js" defer></script>
