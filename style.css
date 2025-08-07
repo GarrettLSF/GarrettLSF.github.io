@@ -269,13 +269,13 @@ a:hover, a:focus-visible {
     transform: scale(1.05);
 }
 .site-logo-image {
-    height: 38px;
+    height: 70px;
     width: auto;
     transition: all var(--transition-smooth);
     filter: brightness(1);
 }
 .main-header.is-scrolled .site-logo-image {
-    height: 32px;
+    height: 40px;
 }
 .logo:hover .site-logo-image {
     filter: brightness(1.1);
