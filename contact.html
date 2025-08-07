@@ -47,7 +47,7 @@
                 <div class="contact-grid anim-fade-in-up" data-delay="100">
                     
                     <div class="contact-form">
-                        <form id="contactForm" action="#" method="POST">
+                        <form id="contactForm" action="https://formspree.io/f/xdkdpgwk" method="POST">
                             <div class="form-group">
                                 <label for="name">Your Name *</label>
                                 <input type="text" id="name" name="name" required>
@@ -66,6 +66,19 @@
                             </div>
                             <button type="submit" class="btn btn-primary" style="width: 100%;">Submit Request</button>
                         </form>
+                        <div id="thankyou" style="display:none; margin-top:1em;">
+                          <p>Thank you! Your message has been sent.</p>
+                        </div>
+                        <script>
+                          const form = document.getElementById('contactForm');
+                          const thankyou = document.getElementById('thankyou');
+                          form.addEventListener('submit', function(e) {
+                            setTimeout(() => {
+                              form.style.display = 'none';
+                              thankyou.style.display = 'block';
+                            }, 1000);
+                          });
+                        </script>
                     </div>
 
                     <div class="contact-info">
