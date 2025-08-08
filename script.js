@@ -1,4 +1,4 @@
-// Scroll-reveal for fade/slide-in animations using Intersection Observer
+// Scroll-reveal for fade/slide in animations using Intersection Observer
 const createScrollReveal = () => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
         document.querySelectorAll('.anim-fade-in-up, .anim-slide-in-left, .anim-slide-in-right').forEach(el => {
