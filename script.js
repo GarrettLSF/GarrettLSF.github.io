@@ -450,3 +450,44 @@ const App = {
 };
 
 document.addEventListener('DOMContentLoaded', App.init);
+
+// ===== CONTACT INFO OBFUSCATION (ADDED CODE) =====
+// This function runs after the page loads to protect contact details from bots.
+document.addEventListener('DOMContentLoaded', function() {
+  // Encoded details to prevent scraping
+  const encoded = {
+    phoneLink: 'KzE0NjkzODAxNTUx', // tel:+14693801551
+    phoneText: 'KDQ2OSkgMzgwLTE1NTE=', // (469) 380-1551
+    email: 'dHlsZXJoZXJyaWNrMTNAZ21haWwuY29t' // tylerherrick13@gmail.com
+  };
+
+  // Simple decoder
+  const decode = (str) => window.atob(str);
+
+  // Update all phone links on the page
+  const phoneLinks = document.querySelectorAll('.contact-phone-link');
+  if (phoneLinks.length > 0) {
+    const phoneHref = `tel:${decode(encoded.phoneLink)}`;
+    const phoneInnerText = decode(encoded.phoneText);
+    phoneLinks.forEach(link => {
+      link.href = phoneHref;
+      link.innerText = phoneInnerText;
+      link.setAttribute('aria-label', `Call us at ${phoneInnerText}`);
+    });
+  }
+
+  // Update all email links on the page
+  const emailLinks = document.querySelectorAll('.contact-email-link');
+  if (emailLinks.length > 0) {
+    const emailHref = `mailto:${decode(encoded.email)}`;
+    const emailInnerText = decode(encoded.email);
+    emailLinks.forEach(link => {
+      link.href = emailHref;
+      link.innerText = emailInnerText;
+      link.setAttribute('aria-label', `Email us at ${emailInnerText}`);
+    });
+  }
+});
+};
+
+document.addEventListener('DOMContentLoaded', App.init);
